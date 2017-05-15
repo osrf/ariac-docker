@@ -35,4 +35,5 @@ COPY ./run_team_code.sh /
 RUN chmod 755 /run_team_code.sh
 
 #USER $USERNAME
-ENTRYPOINT ["/build_team_code.sh"]
+RUN /build_team_code.sh
+ENTRYPOINT ["/run_team_code.sh"]

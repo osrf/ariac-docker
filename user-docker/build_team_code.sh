@@ -23,5 +23,3 @@ wget https://bitbucket.org/osrf/ariac/raw/master/ariac_example/src/ariac_example
 
 cd ~/helloworld_ws
 catkin_make
-
-exec "$@"
