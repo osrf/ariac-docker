@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/usr/bin/env bash
 
 . ~/helloworld_ws/devel/setup.bash
 

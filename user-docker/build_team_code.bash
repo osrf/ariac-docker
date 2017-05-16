@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/usr/bin/env bash
 
 . /opt/ros/$ROS_DISTRO/setup.bash
 rosdep init
