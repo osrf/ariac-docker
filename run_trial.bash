@@ -17,6 +17,9 @@ echo "Using comp config: ${COMP_CONFIG_DIR}/${TRIAL_NAME}.yaml"
 
 LOG_DIR=/ariac/logs
 
+# Create the network for the containers to talk to each other.
+./ariac-competitor/ariac_network.bash
+
 # Start the competitors container and let it run in the background.
 ./ariac-competitor/run_competitor_container.bash &
 
