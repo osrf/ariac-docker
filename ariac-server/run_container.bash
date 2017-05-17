@@ -15,6 +15,9 @@ IMAGE_NAME=$2
 DOCKER_EXTRA_ARGS=$3
 COMMAND=$4
 
+NETWORK="ariac-network"
+IP="172.18.0.22"
+
 # XAUTH=/tmp/.docker.xauth
 # xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 if [ ! -f /tmp/.docker.xauth ]
@@ -55,6 +58,10 @@ DISPLAY="${DISPLAY:-:0}"
 docker run --rm --name ${CONTAINER} \
   -e DISPLAY=unix$DISPLAY \
   -e XAUTHORITY=/tmp/.docker.xauth \
+  -e ROS_IP=${IP} \
+  -e ROS_MASTER_URI=http://${IP}:11311 \
+  --ip ${IP} \
+  --net ${NETWORK} \
   -v "/etc/localtime:/etc/localtime:ro" \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v "/tmp/.docker.xauth:/tmp/.docker.xauth" \
