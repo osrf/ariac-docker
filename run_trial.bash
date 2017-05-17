@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-TEAM_NAME=example_team
-TRIAL_NAME=example_trial1
+TEAM_NAME=$1
+TRIAL_NAME=$2
 CONTAINER_NAME=ariac-server-system
 HOST_LOG_DIR=`pwd`/logs/${TEAM_NAME}/${TRIAL_NAME}
 echo ${HOST_LOG_DIR}
@@ -23,6 +23,7 @@ LOG_DIR=/ariac/logs
   "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"
 
 # <call end_competition service from within competitor container>
+# TODO: force user node to call end_competition service
 
 docker kill ariac-competitor-system
 
