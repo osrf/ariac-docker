@@ -24,7 +24,7 @@ NETWORK="ariac-network"
 IP="172.18.0.20"
 SERVER_IP="172.18.0.22"
 
-echo -e "${GREEN}Starting container named '${CONTAINER}' with IP ${IP}...${NOCOLOR}"
+echo -e "${GREEN}Starting docker container named '${CONTAINER}' with IP ${IP}...${NOCOLOR}"
 
 docker run --rm --name ${CONTAINER} \
   -e GAZEBO_MASTER_URI=http://${SERVER_IP}:11346 \
