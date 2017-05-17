@@ -6,4 +6,4 @@ DOCKER_ARGS=""
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-docker build ${DOCKER_ARGS} -t competitor-container ${DIR}
+docker build ${DOCKER_ARGS} -t ariac-competitor ${DIR}
