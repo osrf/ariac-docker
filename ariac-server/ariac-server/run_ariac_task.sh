@@ -20,20 +20,6 @@ usage()
   exit 1
 }
 
-# Wait until the /ariac/competition_state returns "data: done".
-# At this point the task is over.
-#wait_until_competition_ends()
-#{
-#  echo -n "Waiting for task termination..."
-#  OUTPUT=`rostopic echo -n 1 /ariac/competition_state 2>/dev/null`
-#  until [[ $OUTPUT == *"data: done"* ]]
-#  do
-#    OUTPUT=`rostopic echo -n 1 /ariac/competition_state 2>/dev/null`
-#    sleep 1
-#  done
-#  echo -e "${GREEN}OK${NOCOLOR}"
-#}
-
 # Call usage() function if arguments not supplied.
 [[ $# -ne 3 ]] && usage
 
@@ -51,17 +37,7 @@ mkdir -p $DST_FOLDER
 echo -n "Running ARIAC task..."
 
 # Run the task redirecting stdout and stderr.
-rosrun osrf_gear gear.py -v -f $1 $2 #> $DST_FOLDER/output 2>&1 &
-
-echo -e "${GREEN}OK${NOCOLOR}"
-
-# Wait until the task ends.
-#wait_until_competition_ends
-
-echo -n "Terminating Gazebo..."
-
-# Terminate Gazebo.
-killall -w gzserver || true
+ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py -v -f $1 $2 #> $DST_FOLDER/output 2>&1 &
 
 echo -e "${GREEN}OK${NOCOLOR}"
 
