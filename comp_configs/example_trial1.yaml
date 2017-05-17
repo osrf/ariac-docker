@@ -115,4 +115,4 @@ faulty_parts:
   - gasket_part_4
   - gasket_part_3
 
-time_limit: -1
+time_limit: 600

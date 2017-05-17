@@ -119,4 +119,4 @@ models_over_bins:
         num_models_x: 4
         num_models_y: 4
 
-time_limit: -1
+time_limit: 600
