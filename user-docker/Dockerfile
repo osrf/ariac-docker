@@ -29,11 +29,11 @@ RUN adduser $USERNAME sudo
 WORKDIR /home/$USERNAME
 
 # setup entrypoint
-COPY ./build_team_code.bash /
-RUN chmod 755 /build_team_code.bash
-COPY ./run_team_code.bash /
-RUN chmod 755 /run_team_code.bash
+COPY ./build_team_system.bash /
+RUN chmod 755 /build_team_system.bash
+COPY ./run_team_system.bash /
+RUN chmod 755 /run_team_system.bash
 
 #USER $USERNAME
-RUN /build_team_code.bash
-ENTRYPOINT ["/run_team_code.bash"]
+RUN /build_team_system.bash
+ENTRYPOINT ["/run_team_system.bash"]
