@@ -13,5 +13,6 @@ RUN apt-get update && apt-get install -y \
 
 # setup entrypoint
 COPY ./ariac_entrypoint.sh /
+COPY ../run_ariac_.sh /
 
 ENTRYPOINT ["/ariac_entrypoint.sh"]
