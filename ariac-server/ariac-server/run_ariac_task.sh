@@ -46,5 +46,3 @@ echo -n "Copying logs into [$DST_FOLDER]..."
 cp --recursive --dereference ~/.ariac/log/* $DST_FOLDER
 
 echo -e "${GREEN}OK${NOCOLOR}"
-sleep infinity # workaround for docker run args "-it" not working
-
