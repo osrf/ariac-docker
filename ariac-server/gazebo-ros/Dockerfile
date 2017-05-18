@@ -24,8 +24,8 @@ RUN rosdep init \
 # install ros packages
 ENV ROS_DISTRO trusty
 RUN apt-get update && apt-get install -y \
-    ros-indigo-ros-core=1.1.4-0* \
-    ros-indigo-ros-base=1.1.4-0* \
+    ros-indigo-ros-core \
+    ros-indigo-ros-base \
 	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
