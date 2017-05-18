@@ -1,4 +1,6 @@
-FROM nvidia-gazebo-ros:latest
+#TODO: re-enable nvidia support optionally.
+#FROM nvidia-gazebo-ros:latest
+FROM gazebo-ros:latest
 USER root
 
 # Install the ariac package

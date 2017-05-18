@@ -27,7 +27,9 @@ then
 fi
 
 # Use lspci to check for the presence of an nvidia graphics card
-has_nvidia=`lspci | grep -i nvidia | wc -l`
+# TODO: re-enable nvidia support optionally.
+#has_nvidia=`lspci | grep -i nvidia | wc -l`
+has_nvidia=0
 
 # Set docker gpu parameters
 if [ ${has_nvidia} -gt 0 ]
