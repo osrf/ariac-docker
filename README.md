@@ -14,7 +14,7 @@ cd ariac-docker
 
 ## Install `Docker`
 
-Please, follow [these instructions](https://docs.docker.com/engine/installation/linux/ubuntu/) and install `Docker` CE.
+Please, follow [these instructions](https://docs.docker.com/engine/installation/linux/ubuntu/) and install `Docker CE`.
 
 ## Preparing the workspace
 
