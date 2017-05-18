@@ -1,3 +1,8 @@
+# ARIAC Finals
+
+This repository contains the setup that will be used to automatically evaluate teams' submission for the Agile Robotics for Industrial Automation Competition (ARIAC) hosted by the National Institute of Standards and Technology (NIST).
+For full details on the competition Finals, please see https://bitbucket.org/osrf/ariac/wiki/finals
+
 ## Getting the code
 
 Clone this code repository locally:
@@ -9,16 +14,17 @@ cd ariac-docker
 
 ## Preparing the workspace
 
-Team configuration files must be put in the `ariac-docker` directory in a folder with the name of the team.
+Team configuration files must be put into a folder with the name of the team.
 
-Let's get the configuration files for an example team called `example_team`:
+We have provided an example submission in this repository.
+You should see that there is a directory called `example_team` that has the following configuration files in it:
 
 ```
-./get_example_team_system.bash
-ls
+build_team_system.bash  run_team_system.bash    team_config.yaml
 ```
 
-You should now see that there is a directory called `example_team` that has the required configuration files in it.
+Together these files constitute a submission.
+The files are explained at https://bitbucket.org/osrf/ariac/wiki/finals
 
 ## Preparing the ARIAC system
 
