@@ -12,6 +12,10 @@ git clone https://github.com/osrf/ariac-docker
 cd ariac-docker
 ```
 
+## Install `docker`.
+
+Please, follow [these instructions](https://docs.docker.com/engine/installation/linux/ubuntu/) and install `Docker` CE.
+
 ## Preparing the workspace
 
 Team configuration files must be put into a folder with the name of the team.
