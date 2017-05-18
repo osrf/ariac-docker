@@ -12,7 +12,7 @@ git clone https://github.com/osrf/ariac-docker
 cd ariac-docker
 ```
 
-## Install `docker`.
+## Install `Docker`
 
 Please, follow [these instructions](https://docs.docker.com/engine/installation/linux/ubuntu/) and install `Docker` CE.
 
