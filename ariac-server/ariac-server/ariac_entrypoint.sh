@@ -12,8 +12,8 @@ source "/opt/ros/indigo/etc/catkin/profile.d/99_osrf_gear_setup.sh"
 echo "ariac entrypoint executed"
 
 # run gear
+# TODO: optionally disable this so a gzclient can be run on the host for development.
 export GAZEBO_IP=127.0.0.1
 export GAZEBO_IP_WHITE_LIST=127.0.0.1
-#rosrun osrf_gear gear.py --verbose -f `catkin_find --share osrf_gear`/config/qual3b.yaml /team_config/team_config.yaml
 
 exec "$@"

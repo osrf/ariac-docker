@@ -2,6 +2,8 @@
 
 TEAM_NAME=$1
 
+#TODO: add ROS distro as an argument.
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Preparing the team system setup for team '${TEAM_NAME}"

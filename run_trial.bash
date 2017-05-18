@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+#TODO: RE-ENABLE THIS. (dhood): it was disabled because when the server container shuts down, it appears to return non-zero.
+# set -e
+
 TEAM_NAME=$1
 TRIAL_NAME=$2
+
+#TODO: generate unique container names based on input arguments
 CONTAINER_NAME=ariac-server-system
 
 HOST_LOG_DIR=`pwd`/logs/${TEAM_NAME}/${TRIAL_NAME}
@@ -9,7 +14,7 @@ echo "Creating directory: ${HOST_LOG_DIR}"
 mkdir -p ${HOST_LOG_DIR}
 
 # TODO: don't rely on script being run in the root directory
-# TODO: error checking
+# TODO: error checking for case when files can't be found
 TEAM_CONFIG_DIR=`pwd`/${TEAM_NAME}
 echo "Using team config: ${TEAM_CONFIG_DIR}/team_config.yaml"
 COMP_CONFIG_DIR=`pwd`/comp_configs
@@ -21,6 +26,7 @@ LOG_DIR=/ariac/logs
 ./ariac-competitor/ariac_network.bash
 
 # Start the competitors container and let it run in the background.
+#TODO: parameterize the container name
 ./ariac-competitor/run_competitor_container.bash &
 
 # Start the competition server. When the trial ends, the container will be killed.
@@ -36,5 +42,6 @@ LOG_DIR=/ariac/logs
 docker kill ariac-competitor-system
 
 # Make the log playable
+#TODO: figure out why the ownership of the state log is root and resolve.
 echo "Changing ownership of gazebo state log"
 sudo chown $USER ${HOST_LOG_DIR}/gazebo/state.log

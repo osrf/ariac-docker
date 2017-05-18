@@ -6,5 +6,6 @@ TEAM_NAME=$1
 declare -a TRIAL_NAMES=("example_trial1" "example_trial2")
 for TRIAL_NAME in ${TRIAL_NAMES[@]}; do
   echo "Running trial: ${TRIAL_NAME}"
+  #TODO: GET THIS TO RUN THE INDIVIDUAL TRIALS CORRECTLY.
   ./run_trial.bash ${TEAM_NAME} ${TRIAL_NAME}
 done

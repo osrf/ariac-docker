@@ -37,7 +37,8 @@ mkdir -p $DST_FOLDER
 echo -n "Running ARIAC task..."
 
 # Run the task redirecting stdout and stderr.
-ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py -v -f $1 $2 #> $DST_FOLDER/output 2>&1 &
+# TODO: re-enable redirection. (dhood): it was disabled to get containerization to work.
+ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py --no-gui -v -f $1 $2 #> $DST_FOLDER/output 2>&1 &
 
 echo -e "${GREEN}OK${NOCOLOR}"
 
