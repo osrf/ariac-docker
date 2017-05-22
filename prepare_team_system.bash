@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
-TEAM_NAME=$1
-
-#TODO: add ROS distro as an argument.
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+TEAM_NAME=${1}
+
+if [[ $# -lt 1 ]]; then
+  echo "$0 <team-image-dir-name>"
+  exit 1
+fi
+
+if [[ ! -d ${TEAM_NAME} ]]; then
+  echo "Can not find team directory in path ${TEAM_NAME}"
+  exit 1
+fi
 
 echo "Preparing the team system setup for team '${TEAM_NAME}"
 

@@ -3,12 +3,14 @@
 FROM gazebo-ros:latest
 USER root
 
+ARG ROS_DISTRO_BUILD_TIME
+
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
-        ros-indigo-ros-core \
-        ros-indigo-ros-base \
-        ros-indigo-catkin \
-        ros-indigo-ros-controllers \
+        ros-${ROS_DISTRO_BUILD_TIME}-ros-core \
+        ros-${ROS_DISTRO_BUILD_TIME}-ros-base \
+        ros-${ROS_DISTRO_BUILD_TIME}-catkin \
+        ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \
         ariac \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
