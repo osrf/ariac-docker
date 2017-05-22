@@ -29,7 +29,7 @@ esac
 cp ${DIR}/gzserver/Dockerfile_${UBUNTU_DISTRO_TO_BUILD} \
    ${DIR}/gzserver/Dockerfile
 
-docker_images="gazebo gazebo-ros nvidia-gazebo-ros ariac-server"
+docker_images="gzserver gazebo gazebo-ros nvidia-gazebo-ros ariac-server"
 
 for docker_img in ${docker_images}; do
   echo " Build image: ${docker_img} "
