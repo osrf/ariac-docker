@@ -131,3 +131,13 @@ To run all trials listed in the `comp_configs` directory, call:
 This will run each of the trials sequentially automatically.
 This is the invocation that will be used to test submissions for the Finals: your system will not be provided with any information about the trial number or the conditions of the trial.
 If your system performs correctly with this invocation, regardless of the set of configuration files in the `comp_configs` directory, you're ready for the competition.
+
+## Troubleshooting
+
+If during your development you need to kill the ARIAC server/competitor containers, you can do so with:
+
+```
+./kill_ariac_containers.bash
+```
+
+This will kill and remove all ARIAC containers.
