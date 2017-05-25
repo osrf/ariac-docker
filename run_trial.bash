@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-#TODO: RE-ENABLE THIS. (dhood): it was disabled because when the server container shuts down, it appears to return non-zero.
-# set -e
+set -e
 
 TEAM_NAME=$1
 TRIAL_NAME=$2
@@ -37,7 +36,7 @@ LOG_DIR=/ariac/logs
   -v ${COMP_CONFIG_DIR}:/ariac/comp_configs \
   -v ${HOST_LOG_DIR}:${LOG_DIR} \
   -e ARIAC_EXIT_ON_COMPLETION=1" \
-  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"
+  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"; echo $?
 
 docker kill ariac-competitor-system
 
