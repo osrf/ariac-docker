@@ -2,6 +2,8 @@ DOCKER_ARGS=""
 # Uncoment this line to rebuild without cache
 #DOCKER_ARGS="--no-cache"
 
+set -x
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 USERID=`id -u $USER`
