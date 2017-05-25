@@ -39,8 +39,3 @@ LOG_DIR=/ariac/logs
   "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"; echo $?
 
 docker kill ariac-competitor-system
-
-# Make the log playable
-#TODO: figure out why the ownership of the state log is root and resolve.
-echo "Changing ownership of gazebo state log"
-sudo chown $USER ${HOST_LOG_DIR}/gazebo/state.log

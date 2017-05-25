@@ -23,4 +23,5 @@ RUN apt-get update && apt-get install -y \
 COPY ./ariac_entrypoint.sh /
 COPY ./run_ariac_task.sh /
 
+USER $USERNAME
 ENTRYPOINT ["/ariac_entrypoint.sh"]
