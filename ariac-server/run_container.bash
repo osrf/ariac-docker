@@ -10,6 +10,8 @@
 # Example command line:
 # ./run_container.bash test ariac-server "-v logs:/home/cloudsim/gazebo-logs" /bin/bash
 
+set -x
+
 CONTAINER=$1
 IMAGE_NAME=$2
 DOCKER_EXTRA_ARGS=$3
@@ -45,6 +47,7 @@ then
   if curl -s http://localhost:3476/docker/cli > /dev/null
   then
     DOCKER_GPU_PARAMS=" $(curl -s http://localhost:3476/docker/cli)"
+    DISPLAY_PARAMS=" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY"
   else
     echo nvidia-docker-plugin not responding on http://localhost:3476/docker/cli
     echo please install nvidia-docker-plugin
@@ -53,22 +56,22 @@ then
   fi
 else
   DOCKER_GPU_PARAMS=""
+  DISPLAY_PARAMS=""
 fi
 
 DISPLAY="${DISPLAY:-:0}"
 
 docker run --rm --name ${CONTAINER} \
-  -e DISPLAY=unix$DISPLAY \
   -e XAUTHORITY=/tmp/.docker.xauth \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${IP}:11311 \
   --ip ${IP} \
   --net ${NETWORK} \
   -v "/etc/localtime:/etc/localtime:ro" \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v "/tmp/.docker.xauth:/tmp/.docker.xauth" \
   -v /dev/log:/dev/log \
   ${DOCKER_EXTRA_ARGS} \
   ${DOCKER_GPU_PARAMS} \
+  ${DOCKER_DISPLAY_PARAMS} \
   ${IMAGE_NAME} \
   ${COMMAND}
