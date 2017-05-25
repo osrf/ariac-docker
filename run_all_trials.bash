@@ -24,6 +24,5 @@ get_list_of_trials()
 
 for TRIAL_NAME in $(get_list_of_trials); do
   echo "Running trial: ${TRIAL_NAME}"
-  #TODO: GET THIS TO RUN THE INDIVIDUAL TRIALS CORRECTLY.
-  ./run_trial.bash ${TEAM_NAME} ${TRIAL_NAME}
+  ./run_trial.bash "${TEAM_NAME}" "${TRIAL_NAME}"
 done
