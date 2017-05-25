@@ -3,11 +3,12 @@
 # This script is used to create and run a docker container from an image
 # (usually from a built ariac-competitor image).
 # The script does not expect any arguments, but may use:
-# --- 1) An optional command to execute in the run container. E.g. /bin/bash 
+# --- 1) An optional command to execute in the run container. E.g. /bin/bash
 # Example command line usage:
 # ./run_competitor_container.bash /bin/bash
 
 set -e
+set -x
 
 # Constants.
 RED='\033[0;31m'
