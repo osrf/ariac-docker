@@ -23,6 +23,8 @@ cd ariac-docker
 
 Please, follow [these instructions](https://docs.docker.com/engine/installation/linux/ubuntu/) and install `Docker CE`.
 
+Continue to the [post-install instructions](https://docs.docker.com/engine/installation/linux/linux-postinstall/) and complete the "Manage Docker as a non-root user" section to avoid having to run the commands on this page using `sudo`.
+
 ## Preparing the workspace
 
 Team configuration files must be put into a folder with the name of the team.
