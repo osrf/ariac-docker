@@ -42,7 +42,11 @@ for docker_img in ${docker_images}; do
       ;;
     'gazebo')
       USERID=`id -u $USER`
-      DOCKER_ARGS="--build-arg USERID=${USERID}"
+      # If the script is run by root, do no pass 0 as the USERID to create the
+      # ariac-user. The Dockerfile defaults it to 1000
+      if [[ ${USERID} == 0 ]]; then
+        DOCKER_ARGS="--build-arg USERID=${USERID}"
+      fi
       ;;
     'gazebo-ros')
       DOCKER_ARGS="--build-arg ROS_DISTRO_BUILD_TIME=${ROS_DISTRO_BUILD_TIME} \
