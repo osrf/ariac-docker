@@ -1,6 +1,8 @@
 FROM gzserver:latest
 
-# This image extends from official gzserver7 image to add a 
+ARG USERID=1000
+
+# This image extends from official gzserver7 image to add a
 # gazebo user and automatically download gazebo models.
 
 # setup environment
@@ -19,7 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Create a new user called ariac. Note: we don't add him to the sudo group
 ENV USERNAME ariac
 RUN locale-gen en_US.UTF-8
-RUN adduser --gecos "Development User" --disabled-password $USERNAME
+RUN adduser -u $USERID --gecos "Development User" --disabled-password $USERNAME
 RUN echo "export QT_X11_NO_MITSHM=1" >> /home/$USERNAME/.bashrc
 
 USER $USERNAME

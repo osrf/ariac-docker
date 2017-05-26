@@ -4,6 +4,8 @@ set -e
 # Uncoment this line to rebuild without cache
 #DOCKER_ARGS="--no-cache"
 
+set -x
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [[ $# -lt 1 ]]; then
@@ -22,7 +24,7 @@ case ${ROS_DISTRO_BUILD_TIME} in
     ;;
   *)
     echo "ROS distribution unsupported: ${ROS_DISTRO_BUILD_TIME}"
-    exit 1 
+    exit 1
 esac
 
 # Set the proper Dockerfile from distro Dockerfiles
@@ -37,6 +39,10 @@ for docker_img in ${docker_images}; do
   case ${docker_img} in
     'ariac-server')
       DOCKER_ARGS="--build-arg ROS_DISTRO_BUILD_TIME=${ROS_DISTRO_BUILD_TIME}"
+      ;;
+    'gazebo')
+      USERID=`id -u $USER`
+      DOCKER_ARGS="--build-arg USERID=${USERID}"
       ;;
     'gazebo-ros')
       DOCKER_ARGS="--build-arg ROS_DISTRO_BUILD_TIME=${ROS_DISTRO_BUILD_TIME} \

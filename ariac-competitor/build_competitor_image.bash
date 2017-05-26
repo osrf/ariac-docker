@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 DOCKER_ARGS=""
 # Uncoment this line to rebuild without cache
 # TODO: expose this as an argument
