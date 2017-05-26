@@ -7,9 +7,6 @@ ARG ROS_DISTRO_BUILD_TIME
 
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
-        ros-${ROS_DISTRO_BUILD_TIME}-ros-core \
-        ros-${ROS_DISTRO_BUILD_TIME}-ros-base \
-        ros-${ROS_DISTRO_BUILD_TIME}-catkin \
         ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \
         ariac \
     && apt-get clean \
