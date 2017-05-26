@@ -146,9 +146,24 @@ If during your development you need to kill the ARIAC server/competitor containe
 
 This will kill and remove all ARIAC containers.
 
+### Investigating build issues
+
+If you are having difficulties installing your team's system with the `prepare_team_system` script, you can open a terminal in a clean competitor container (before the script has been run) and see which commands you need to type manually to get your system installed.
+
+First, run:
+
+```
+docker run -it --rm --name ariac-competitor-clean-system ariac-competitor-clean
+```
+
+This will start a container with the state immediately before trying to run your `build_team_system` script.
+From inside this container, you can type all of the commands you need to install your code, then run `history` to get a list of the commands that you typed: that's what you should put in your `build_team_system` script.
+
+Type `exit` to stop the container.
+
 ### Investigating the contents of a running competitor container
 
-If you are having difficulties running your team's system in the competitor container, you can open a terminal in the container that has your system installed with:
+Once your team's system has been successfully installed in the competitor container, if you are having difficulties *running* your team's system, you can open a terminal in the container that has your system installed with:
 
 ```
 docker run -it --rm --name ariac-competitor-system ariac-competitor
