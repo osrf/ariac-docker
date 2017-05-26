@@ -34,8 +34,11 @@ case ${ROS_DISTRO_BUILD_TIME} in
     exit 1
 esac
 
-# Set the proper Dockerfile from distro Dockerfiles
-cp ${DIR}/ariac-competitor/Dockerfile_${UBUNTU_DISTRO_TO_BUILD} \
+# Create a Dockerfile from the template
+cp ${DIR}/ariac-competitor/Dockerfile_trusty \
+   ${DIR}/ariac-competitor/Dockerfile
+# Set the proper base image in the Dockerfile according to the ROS distro
+sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
    ${DIR}/ariac-competitor/Dockerfile
 
 ${DIR}/ariac-competitor/build_competitor_image.bash ${TEAM_NAME}

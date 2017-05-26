@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python-vcstools \
     wget \
     && rm -rf /var/lib/apt/lists/*
-RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
 RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list
 
 # Install the ariac package
