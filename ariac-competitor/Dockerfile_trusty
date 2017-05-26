@@ -14,7 +14,7 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_releas
 
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
-        ros-indigo-ros-controllers \
+        ros-${ROS_DISTRO}-ros-controllers \
         ariac \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

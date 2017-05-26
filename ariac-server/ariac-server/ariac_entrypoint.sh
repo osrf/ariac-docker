@@ -5,10 +5,10 @@ set -e
 source "/usr/share/gazebo/setup.sh"
 
 # setup ros environment. Ignore redifiniton of ROS_DISTRO
-source "/opt/ros/indigo/setup.bash" > /dev/null
+source "/opt/ros/${ROS_DISTRO}/setup.bash" > /dev/null
 
 # setup ariac environment
-source "/opt/ros/indigo/etc/catkin/profile.d/99_osrf_gear_setup.sh"
+source "/opt/ros/${ROS_DISTRO}/etc/catkin/profile.d/99_osrf_gear_setup.sh"
 echo "ariac entrypoint executed"
 
 # run gear
