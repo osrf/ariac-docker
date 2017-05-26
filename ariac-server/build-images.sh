@@ -44,7 +44,7 @@ for docker_img in ${docker_images}; do
       USERID=`id -u $USER`
       # If the script is run by root, do no pass 0 as the USERID to create the
       # ariac-user. The Dockerfile defaults it to 1000
-      if [[ ${USERID} == 0 ]]; then
+      if [[ ${USERID} != 0 ]]; then
         DOCKER_ARGS="--build-arg USERID=${USERID}"
       fi
       ;;
