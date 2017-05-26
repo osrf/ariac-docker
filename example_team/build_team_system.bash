@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. /opt/ros/$ROS_DISTRO/setup.bash
+. /opt/ros/indigo/setup.bash
 rosdep init
 rosdep update
 
