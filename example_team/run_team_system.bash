@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-. ~/helloworld_ws/devel/setup.bash
+. ~/my_team_ws/install/setup.bash
 
 # Run the example node
-echo "Running ARIAC example node"
-rosrun ariac_example ariac_example_node
+echo "Launching ARIAC example nodes"
+roslaunch ariac_team_example example_nodes.launch

@@ -36,6 +36,6 @@ LOG_DIR=/ariac/logs
   -v ${COMP_CONFIG_DIR}:/ariac/comp_configs \
   -v ${HOST_LOG_DIR}:${LOG_DIR} \
   -e ARIAC_EXIT_ON_COMPLETION=1" \
-  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"; echo $?
+  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"
 
-docker kill ariac-competitor-system
+./kill_ariac_containers.bash

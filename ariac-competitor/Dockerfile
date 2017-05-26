@@ -14,13 +14,12 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_releas
 
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
-        ros-indigo-ros-core \
-        ros-indigo-ros-base \
-        ros-indigo-catkin \
         ros-indigo-ros-controllers \
         ariac \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN rosdep update
 
 # Create a new user called ariac-user and give them sudo priviledges.
 ENV USERNAME ariac-user
