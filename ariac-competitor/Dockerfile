@@ -36,4 +36,4 @@ COPY ./run_team_system_with_delay.bash /
 RUN chmod 755 /run_team_system_with_delay.bash
 
 RUN /build_team_system.bash
-ENTRYPOINT ["/run_team_system_with_delay.bash"]
+ENTRYPOINT ["/bin/bash"]

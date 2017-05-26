@@ -136,6 +136,8 @@ If your system performs correctly with this invocation, regardless of the set of
 
 ## Troubleshooting
 
+### Stopping the competition/containers
+
 If during your development you need to kill the ARIAC server/competitor containers, you can do so with:
 
 ```
@@ -143,3 +145,19 @@ If during your development you need to kill the ARIAC server/competitor containe
 ```
 
 This will kill and remove all ARIAC containers.
+
+### Investigating the contents of a running competitor container
+
+If you are having difficulties running your team's system in the competitor container, you can open a terminal in the container that has your system installed with:
+
+```
+docker run -it --rm --name ariac-competitor-system ariac-competitor
+```
+
+Inside the container you can look around with, for example:
+
+```
+ls ~/my_team_ws
+```
+
+Type `exit` to stop the container.
