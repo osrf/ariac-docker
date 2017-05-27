@@ -1,0 +1,5 @@
+ariac-server/gzserver/Dockerfile
+ariac-competitor/Dockerfile
+*.swp
+*.swo
+logs/
