@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Prepare ROS
-. /opt/ros/indigo/setup.bash
+. /opt/ros/${ROS_DISTRO}/setup.bash
 
 # Install the necessary dependencies for getting the team's source code
 apt-get update
