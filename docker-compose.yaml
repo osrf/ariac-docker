@@ -1,0 +1,21 @@
+version: "2"
+services:
+    ariac-server-system:
+        container_name: ariac-server-system
+        image: ariac-server:latest
+        environment:
+            - "ROS_HOSTNAME=ariac-server-system"
+            - "ROS_MASTER_URI=http://ariac-server-system:11311"
+            - "ARIAC_EXIT_ON_COMPLETION=1"
+        volumes:
+            - ./example_team:/team_config
+            - ./comp_configs:/ariac/comp_configs
+            - ./logs/example_team/example_trial1:/ariac/logs
+        command: /run_ariac_task.sh /ariac/comp_configs/example_trial1.yaml /team_config/team_config.yaml /ariac/logs
+    ariac-competitor-system:
+        container_name: ariac-competitor-system
+        image: ariac-competitor:latest
+        environment:
+            - "ROS_HOSTNAME=ariac-competitor-system"
+            - "ROS_MASTER_URI=http://ariac-server-system:11311"
+        command: /run_team_system_with_delay.bash
