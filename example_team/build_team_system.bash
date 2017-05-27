@@ -4,6 +4,7 @@
 . /opt/ros/${ROS_DISTRO}/setup.bash
 
 # Install the necessary dependencies for getting the team's source code
+# Note: there is no need to use `sudo`.
 apt-get update
 apt-get install -y wget unzip
 

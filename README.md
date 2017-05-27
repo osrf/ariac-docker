@@ -38,6 +38,7 @@ build_team_system.bash  run_team_system.bash    team_config.yaml
 
 Together these files constitute a submission.
 The files are explained at https://bitbucket.org/osrf/ariac/wiki/finals
+You may use the files of the `example_team` submission as a template for your team's submission.
 
 ## Preparing the ARIAC system
 
@@ -48,6 +49,9 @@ To prepare the ARIAC competition system (but not run it), call:
 ```
 
 This will build a Docker "image" of the competition server, ready to be launched as a container later.
+
+By default, ROS Indigo on Ubuntu Trusty will be used.
+You can call `./prepare_ariac_system.bash kinetic` to build with ROS Kinetic on Ubuntu Xenial.
 
 ## Preparing your team's system
 
@@ -62,6 +66,9 @@ To prepare your team's system (but not run it), call:
 
 This will build a Docker "image" of your team's system, ready to be launched with the ARIAC competition server.
 
+By default, ROS Indigo on Ubuntu Trusty will be used.
+You can call `./prepare_team_system.bash <your_team_name> kinetic` to build with ROS Kinetic on Ubuntu Xenial.
+
 ## Running a single trial
 
 To run a specific trial (in this case the trial called `example_trial1`), call:
@@ -73,7 +80,7 @@ To run a specific trial (in this case the trial called `example_trial1`), call:
 # ./run_trial.bash <your_team_name> <trial_name>
 ```
 
-This will instantiate Docker containers of the images that we prepared earlier: one for the ARIAC competition server, and one for your team's system.
+This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
 The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `comp_configs/example_trial1.yaml`), and the user configuration file associated with your team name (i.e. `example_team/team_config.yaml`).
 
 Once the trial has finished (because your system completed the trial, because you made a call to the `/ariac/end_competition` service, or because time ran out), the logs from the trial will be available in the `logs` directory that has now been created locally.
@@ -157,7 +164,7 @@ docker run -it --rm --name ariac-competitor-clean-system ariac-competitor-clean
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
-From inside this container, you can type all of the commands you need to install your code, then run `history` to get a list of the commands that you typed: that's what you should put in your `build_team_system` script.
+From inside this container, you can type all of the commands you need to install your code (you do not need to use `sudo`), then run `history` to get a list of the commands that you typed: that's what you should put in your `build_team_system` script.
 
 Type `exit` to stop the container.
 
