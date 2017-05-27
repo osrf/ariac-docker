@@ -26,7 +26,7 @@ LOG_DIR=/ariac/logs
 
 # Start the competitors container and let it run in the background.
 #TODO: parameterize the container name
-./ariac-competitor/run_competitor_container.bash &
+./ariac-competitor/run_competitor_container.bash "/run_team_system_with_delay.bash" &
 
 # Start the competition server. When the trial ends, the container will be killed.
 # The trial may end because of time-out, because of completion, or because the user called the
@@ -36,6 +36,6 @@ LOG_DIR=/ariac/logs
   -v ${COMP_CONFIG_DIR}:/ariac/comp_configs \
   -v ${HOST_LOG_DIR}:${LOG_DIR} \
   -e ARIAC_EXIT_ON_COMPLETION=1" \
-  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"; echo $?
+  "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"
 
-docker kill ariac-competitor-system
+./kill_ariac_containers.bash

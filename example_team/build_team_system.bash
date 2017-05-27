@@ -1,25 +1,20 @@
 #!/usr/bin/env bash
 
-. /opt/ros/$ROS_DISTRO/setup.bash
-rosdep init
-rosdep update
+# Prepare ROS
+. /opt/ros/${ROS_DISTRO}/setup.bash
 
+# Install the necessary dependencies for getting the team's source code
+# Note: there is no need to use `sudo`.
 apt-get update
-apt-get install -y wget
+apt-get install -y wget unzip
 
-# Follow tutorial: http://wiki.ros.org/ariac/Tutorials/HelloWorld
-mkdir -p ~/helloworld_ws/src/ariac_example
-cd ~/helloworld_ws/src/ariac_example
-wget https://bitbucket.org/osrf/ariac/raw/master/ariac_example/package.xml 
-wget https://bitbucket.org/osrf/ariac/raw/no_catkin_python_setup/ariac_example/CMakeLists.txt
+# Create a catkin workspace
+mkdir -p ~/my_team_ws/src
 
-mkdir -p ~/helloworld_ws/src/ariac_example/config
-cd ~/helloworld_ws/src/ariac_example/config
-wget https://bitbucket.org/osrf/ariac/raw/master/ariac_example/config/sample_gear_conf.yaml
+# Fetch the source code for our team's code
+cd ~/my_team_ws/src
+wget https://bitbucket.org/osrf/ariac_team_example/get/master.zip
+unzip master.zip
 
-mkdir -p ~/helloworld_ws/src/ariac_example/src
-cd ~/helloworld_ws/src/ariac_example/src
-wget https://bitbucket.org/osrf/ariac/raw/master/ariac_example/src/ariac_example_node.cpp
-
-cd ~/helloworld_ws
-catkin_make
+cd ~/my_team_ws
+catkin_make install

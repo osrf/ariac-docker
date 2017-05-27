@@ -1,5 +1,5 @@
 ariac-server/gzserver/Dockerfile
-ariac-competitor/Dockerfile
+ariac-competitor/ariac-competitor-clean/Dockerfile
 *.swp
 *.swo
 logs/
