@@ -77,7 +77,7 @@ RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
                   catkin_init_workspace"
 RUN git clone \
       https://github.com/ros-simulation/gazebo_ros_pkgs /tmp/ros_ws/src/gazebo_ros_pkgs \
-      -b ${ROS_DISTRO_BUILD_TIME}-devel
+      -b ariac-network-${ROS_DISTRO_BUILD_TIME}
 RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
                   cd /tmp/ros_ws/ && \
                   catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO_BUILD_TIME} -j2 install "
