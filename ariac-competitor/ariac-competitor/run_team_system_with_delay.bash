@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Waiting for ROS master"
-. /opt/ros/indigo/setup.bash
+. /opt/ros/*/setup.bash
 until rostopic list ; do sleep 1; done
 
 # Wait for the ARIAC server to come up
