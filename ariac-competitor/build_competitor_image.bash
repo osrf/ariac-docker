@@ -45,7 +45,7 @@ cp ${TEAM_CONFIG_DIR}/build_team_system.bash ${DIR}/ariac-competitor/build_team_
 cp ${TEAM_CONFIG_DIR}/run_team_system.bash ${DIR}/ariac-competitor/run_team_system.bash
 
 docker build ${DOCKER_ARGS} -t ariac-competitor-clean:latest ${DIR}/ariac-competitor-clean
-docker build ${DOCKER_ARGS} -t ariac-competitor:latest ${DIR}/ariac-competitor
+docker build ${DOCKER_ARGS} -t ariac-competitor-${TEAM_NAME}:latest ${DIR}/ariac-competitor
 
 echo "Removing temporary team scripts"
 rm ${DIR}/ariac-competitor/build_team_system.bash

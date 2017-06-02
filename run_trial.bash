@@ -34,8 +34,8 @@ LOG_DIR=/ariac/logs
 ./ariac-competitor/ariac_network.bash
 
 # Start the competitors container and let it run in the background.
-#TODO: parameterize the container name
-./ariac-competitor/run_competitor_container.bash "/run_team_system_with_delay.bash" &
+COMPETITOR_IMAGE_NAME="ariac-competitor-${TEAM_NAME}"
+./ariac-competitor/run_competitor_container.bash ${COMPETITOR_IMAGE_NAME} "/run_team_system_with_delay.bash" &
 
 # Start the competition server. When the trial ends, the container will be killed.
 # The trial may end because of time-out, because of completion, or because the user called the

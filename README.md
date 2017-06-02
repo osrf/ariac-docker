@@ -193,7 +193,9 @@ Type `exit` to stop the container.
 Once your team's system has been successfully installed in the competitor container, if you are having difficulties *running* your team's system, you can open a terminal in the container that has your system installed with:
 
 ```
-docker run -it --rm --name ariac-competitor-system ariac-competitor
+docker run -it --rm --name ariac-competitor-system ariac-competitor-<your_team_name>
+# e.g. for example_team:
+# docker run -it --rm --name ariac-competitor-system ariac-competitor-example_team
 ```
 
 Inside the container you can look around with, for example:
