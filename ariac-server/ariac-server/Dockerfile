@@ -18,6 +18,69 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Need to install an specific version of gazebo_ros_pkgs
+# 1. Install dependencies
+RUN apt-get update && apt-get install -y \
+        libgazebo7-dev                                       \
+	ros-${ROS_DISTRO_BUILD_TIME}-ros                     \
+	ros-${ROS_DISTRO_BUILD_TIME}-catkin                  \
+	ros-${ROS_DISTRO_BUILD_TIME}-pluginlib               \
+	ros-${ROS_DISTRO_BUILD_TIME}-roscpp                  \
+	ros-${ROS_DISTRO_BUILD_TIME}-angles                  \
+	ros-${ROS_DISTRO_BUILD_TIME}-camera-info-manager     \
+	ros-${ROS_DISTRO_BUILD_TIME}-cmake-modules           \
+	ros-${ROS_DISTRO_BUILD_TIME}-controller-manager      \
+	ros-${ROS_DISTRO_BUILD_TIME}-control-toolbox         \
+	ros-${ROS_DISTRO_BUILD_TIME}-tf                      \
+	ros-${ROS_DISTRO_BUILD_TIME}-cv-bridge               \
+	ros-${ROS_DISTRO_BUILD_TIME}-diagnostic-updater      \
+	ros-${ROS_DISTRO_BUILD_TIME}-dynamic-reconfigure     \
+	ros-${ROS_DISTRO_BUILD_TIME}-geometry-msgs           \
+	ros-${ROS_DISTRO_BUILD_TIME}-image-transport         \
+	ros-${ROS_DISTRO_BUILD_TIME}-joint-limits-interface  \
+	ros-${ROS_DISTRO_BUILD_TIME}-message-generation      \
+	ros-${ROS_DISTRO_BUILD_TIME}-nav-msgs                \
+	ros-${ROS_DISTRO_BUILD_TIME}-nodelet                 \
+	ros-${ROS_DISTRO_BUILD_TIME}-pcl-conversions         \
+	ros-${ROS_DISTRO_BUILD_TIME}-polled-camera           \
+	ros-${ROS_DISTRO_BUILD_TIME}-rosconsole              \
+	ros-${ROS_DISTRO_BUILD_TIME}-rosgraph-msgs           \
+	ros-${ROS_DISTRO_BUILD_TIME}-sensor-msgs             \
+	ros-${ROS_DISTRO_BUILD_TIME}-std-srvs                \
+	ros-${ROS_DISTRO_BUILD_TIME}-tf                      \
+	ros-${ROS_DISTRO_BUILD_TIME}-tf2-ros                 \
+	ros-${ROS_DISTRO_BUILD_TIME}-trajectory-msgs         \
+	ros-${ROS_DISTRO_BUILD_TIME}-transmission-interface  \
+	ros-${ROS_DISTRO_BUILD_TIME}-urdf                    \
+	ros-${ROS_DISTRO_BUILD_TIME}-xacro                   \
+	ros-${ROS_DISTRO_BUILD_TIME}-ros-base                \
+	ros-${ROS_DISTRO_BUILD_TIME}-pcl-ros                 \
+	&& apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+RUN if [ "${ROS_DISTRO_BUILD_TIME}" = "indigo" ]; then \
+      apt-get install -y ros-${ROS_DISTRO_BUILD_TIME}-driver-base; \
+    fi \
+	&& apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+# 2. Remove official packages
+RUN if [ "${ROS_DISTRO_BUILD_TIME}" = "indigo" ]; then \
+       export GZ_VERSION=7; \
+    fi && \
+    dpkg -r --force-depends ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-ros-pkgs \
+                            ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-ros \
+                            ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-plugins \
+                            ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-msgs \
+                            ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-ros-control
+RUN mkdir -p /tmp/ros_ws/src
+RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
+                  cd /tmp/ros_ws/src && \
+                  catkin_init_workspace"
+RUN git clone \
+      https://github.com/ros-simulation/gazebo_ros_pkgs /tmp/ros_ws/src/gazebo_ros_pkgs \
+      -b ariac-network-${ROS_DISTRO_BUILD_TIME}
+RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
+                  cd /tmp/ros_ws/ && \
+                  catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO_BUILD_TIME} -j2 install "
 # setup entrypoint
 COPY ./ariac_entrypoint.sh /
 COPY ./run_ariac_task.sh /
