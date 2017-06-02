@@ -2,14 +2,11 @@
 
 set -x
 
-DOCKER_ARGS=""
-# Uncoment this line to rebuild without cache
-# TODO: expose this as an argument
-#DOCKER_ARGS="--no-cache"
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 TEAM_NAME=$1
+DOCKER_ARGS=$2
+
 TEAM_CONFIG_DIR=${DIR}/../team_configs/${TEAM_NAME}
 
 ROS_DISTRO_FILE=${TEAM_CONFIG_DIR}/ros_distro.txt
