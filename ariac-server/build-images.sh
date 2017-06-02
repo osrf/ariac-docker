@@ -64,15 +64,14 @@ for docker_img in ${docker_images}; do
 
   if [ ${docker_img} != "gzserver" ]; then
     # Set the proper base image in the Dockerfile according to the ROS distro
+    cp ${DIR}/${docker_img}/Dockerfile_generic \
+       ${DIR}/${docker_img}/Dockerfile
     sed -i "s/:latest/-${ROS_DISTRO_BUILD_TIME}:latest/" \
       ${DIR}/${docker_img}/Dockerfile
   fi
+
+  # Tag the image according to the ROS distro
   docker build ${DOCKER_ARGS} \
     --tag ${docker_img}-${ROS_DISTRO_BUILD_TIME}:latest \
       $DIR/${docker_img}
-  if [ ${docker_img} != "gzserver" ]; then
-    # Set the proper base image in the Dockerfile according to the ROS distro
-    sed -i "s/-${ROS_DISTRO_BUILD_TIME}:latest/:latest/" \
-      ${DIR}/${docker_img}/Dockerfile
-  fi
 done
