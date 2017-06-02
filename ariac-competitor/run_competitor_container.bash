@@ -28,7 +28,6 @@ SERVER_IP="172.18.0.22"
 echo -e "${GREEN}Starting docker container named '${CONTAINER}' with IP ${IP}...${NOCOLOR}"
 
 docker run --rm --name ${CONTAINER} \
-  -e GAZEBO_MASTER_URI=http://${SERVER_IP}:11346 \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${SERVER_IP}:11311 \
   --ip ${IP} \

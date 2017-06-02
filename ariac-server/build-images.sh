@@ -62,6 +62,6 @@ for docker_img in ${docker_images}; do
   esac
 
   docker build ${DOCKER_ARGS} \
-    --tag ${docker_img}:latest \
+    --tag ${docker_img}-${ROS_DISTRO_BUILD_TIME}:latest \
       $DIR/${docker_img}
 done
