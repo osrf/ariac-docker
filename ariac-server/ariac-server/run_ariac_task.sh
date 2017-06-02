@@ -47,5 +47,8 @@ cp --recursive --dereference ~/.ariac/log/* $DST_FOLDER
 # Copy ROS log files.
 mkdir -p $DST_FOLDER/ros
 cp --recursive --dereference ~/.ros/log/latest/* $DST_FOLDER/ros
+# Copy ARIAC generated files.
+mkdir -p $DST_FOLDER/generated
+cp --recursive --dereference /tmp/ariac/* $DST_FOLDER/generated
 
 echo -e "${GREEN}OK${NOCOLOR}"
