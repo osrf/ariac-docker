@@ -14,7 +14,7 @@ mkdir -p ${HOST_LOG_DIR}
 
 # TODO: don't rely on script being run in the root directory
 # TODO: error checking for case when files can't be found
-TEAM_CONFIG_DIR=`pwd`/${TEAM_NAME}
+TEAM_CONFIG_DIR=`pwd`/team_configs/${TEAM_NAME}
 echo "Using team config: ${TEAM_CONFIG_DIR}/team_config.yaml"
 COMP_CONFIG_DIR=`pwd`/comp_configs
 echo "Using comp config: ${COMP_CONFIG_DIR}/${TRIAL_NAME}.yaml"
