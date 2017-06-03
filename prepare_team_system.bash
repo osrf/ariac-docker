@@ -5,12 +5,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TEAM_NAME=${1}
 
 if [[ $# -lt 1 ]]; then
-  echo "$0 <team-image-dir-name> [<ros-distro-to-build>=indigo]"
+  echo "$0 <team-image-dir-name>"
   exit 1
 fi
 
-if [[ ! -d ${TEAM_NAME} ]]; then
-  echo "Can not find team directory in path ${TEAM_NAME}"
+if [[ ! -d team_configs/${TEAM_NAME} ]]; then
+  echo "Can not find team directory in 'team_configs' directory: ${TEAM_NAME}"
   exit 1
 fi
 
@@ -19,26 +19,5 @@ if [[ $# -lt 1 ]]; then
   echo "$0 "
   exit 1
 fi
-
-ROS_DISTRO_BUILD_TIME=${2-indigo}
-
-case ${ROS_DISTRO_BUILD_TIME} in
-  indigo)
-    UBUNTU_DISTRO_TO_BUILD=trusty
-    ;;
-  kinetic)
-    UBUNTU_DISTRO_TO_BUILD=xenial
-    ;;
-  *)
-    echo "ROS distribution unsupported: ${ROS_DISTRO_BUILD_TIME}"
-    exit 1
-esac
-
-# Create a Dockerfile from the template
-cp ${DIR}/ariac-competitor/ariac-competitor-clean/Dockerfile_trusty \
-   ${DIR}/ariac-competitor/ariac-competitor-clean/Dockerfile
-# Set the proper base image in the Dockerfile according to the ROS distro
-sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
-   ${DIR}/ariac-competitor/ariac-competitor-clean/Dockerfile
 
 ${DIR}/ariac-competitor/build_competitor_image.bash ${TEAM_NAME}
