@@ -24,5 +24,7 @@ get_list_of_trials()
 
 for TRIAL_NAME in $(get_list_of_trials); do
   echo "Running trial: ${TRIAL_NAME}"
-  ./run_trial.bash "${TEAM_NAME}" "${TRIAL_NAME}"
+  CONSOLE_OUTPUT_DIR=logs/${TEAM_NAME}/${TRIAL_NAME}
+  mkdir -p ${CONSOLE_OUTPUT_DIR}
+  ./run_trial.bash "${TEAM_NAME}" "${TRIAL_NAME}" > ${CONSOLE_OUTPUT_DIR}/output.txt 2>&1
 done
