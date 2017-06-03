@@ -5,7 +5,12 @@ set -e
 TEAM_NAME=$1
 TRIAL_NAME=$2
 
-#TODO: generate unique container names based on input arguments
+# Constants.
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NOCOLOR='\033[0m'
+
 CONTAINER_NAME=ariac-server-system
 
 HOST_LOG_DIR=`pwd`/logs/${TEAM_NAME}/${TRIAL_NAME}
@@ -46,5 +51,10 @@ COMPETITOR_IMAGE_NAME="ariac-competitor-${TEAM_NAME}"
   -v ${HOST_LOG_DIR}:${LOG_DIR} \
   -e ARIAC_EXIT_ON_COMPLETION=1" \
   "/run_ariac_task.sh /ariac/comp_configs/${TRIAL_NAME}.yaml /team_config/team_config.yaml ${LOG_DIR}"
+
+# Copy the ROS log files from the competitor's container.
+echo "Copying ROS log files from competitor container..."
+docker cp --follow-link ariac-competitor-${TEAM_NAME}-system:/root/.ros/log/latest $HOST_LOG_DIR/ros-competitor
+echo -e "${GREEN}OK${NOCOLOR}"
 
 ./kill_ariac_containers.bash
