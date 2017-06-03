@@ -29,11 +29,11 @@ Continue to the [post-install instructions](https://docs.docker.com/engine/insta
 
 Team configuration files must be put into a folder with the name of the team.
 
-We have provided an example submission in this repository.
+We have provided an example submission in the `team_configs` directory of this repository.
 You should see that there is a directory called `example_team` that has the following configuration files in it:
 
 ```
-build_team_system.bash  run_team_system.bash    team_config.yaml
+build_team_system.bash  run_team_system.bash    team_config.yaml    ros_distro.txt
 ```
 
 Together these files constitute a submission.
@@ -150,6 +150,10 @@ This is the invocation that will be used to test submissions for the Finals: you
 If your system performs correctly with this invocation, regardless of the set of configuration files in the `comp_configs` directory, you're ready for the competition.
 
 ## Troubleshooting
+
+### Keeping the competition setup software up to date
+
+You will need to run `git pull` to fetch any recent modifications to the competition system setup, and re-run all scripts in order for the changes to take effect.
 
 ### Stopping the competition/containers
 
