@@ -35,6 +35,9 @@ fi
 
 LOG_DIR=/ariac/logs
 
+# Ensure any previous containers are killed and removed.
+./kill_ariac_containers.bash
+
 # Create the network for the containers to talk to each other.
 ./ariac-competitor/ariac_network.bash
 
@@ -58,3 +61,5 @@ docker cp --follow-link ariac-competitor-${TEAM_NAME}-system:/root/.ros/log/late
 echo -e "${GREEN}OK${NOCOLOR}"
 
 ./kill_ariac_containers.bash
+
+exit 0
