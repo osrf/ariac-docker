@@ -41,8 +41,14 @@ ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py --no-gui -v -f $1 $2
 
 echo -e "${GREEN}OK${NOCOLOR}"
 
-# Copy log files.
+# Copy ARIAC log files.
 echo -n "Copying logs into [$DST_FOLDER]..."
 cp --recursive --dereference ~/.ariac/log/* $DST_FOLDER
+# Copy ROS log files.
+mkdir -p $DST_FOLDER/ros
+cp --recursive --dereference ~/.ros/log/latest/* $DST_FOLDER/ros
+# Copy ARIAC generated files.
+mkdir -p $DST_FOLDER/generated
+cp --recursive --dereference /tmp/ariac/* $DST_FOLDER/generated
 
 echo -e "${GREEN}OK${NOCOLOR}"

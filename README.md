@@ -50,6 +50,8 @@ To prepare the ARIAC competition system (but not run it), call:
 
 This will build a Docker "image" of the competition server, ready to be launched as a container later.
 
+This will take a while to build, but you will not have to re-build it often.
+
 By default, ROS Indigo on Ubuntu Trusty will be used.
 You can call `./prepare_ariac_system.bash kinetic` to build with ROS Kinetic on Ubuntu Xenial.
 
@@ -67,7 +69,7 @@ To prepare your team's system (but not run it), call:
 This will build a Docker "image" of your team's system, ready to be launched with the ARIAC competition server.
 
 By default, ROS Indigo on Ubuntu Trusty will be used.
-You can call `./prepare_team_system.bash <your_team_name> kinetic` to build with ROS Kinetic on Ubuntu Xenial.
+You can add `ros_distro.txt`, with contents of `kinetic` to your team's configuration directory if you want your system to be built with ROS Kinetic on Ubuntu Xenial.
 
 ## Running a single trial
 
@@ -149,7 +151,7 @@ This will run each of the trials sequentially automatically.
 This is the invocation that will be used to test submissions for the Finals: your system will not be provided with any information about the trial number or the conditions of the trial.
 If your system performs correctly with this invocation, regardless of the set of configuration files in the `comp_configs` directory, you're ready for the competition.
 
-## Troubleshooting
+## Development tips
 
 ### Keeping the competition setup software up to date
 
@@ -164,6 +166,12 @@ If during your development you need to kill the ARIAC server/competitor containe
 ```
 
 This will kill and remove all ARIAC containers.
+
+### Utilizing the Docker cache to when re-building the competitor system
+
+By default, runnng `./build_team_system.bash <your_team_name>` will re-build the image from scratch.
+During development you may find it useful to call `./build_team_system.bash <your_team_name> --use-cache` to re-use already-built image in the Docker cache if appropriate.
+However, new versions of packages may have been released since the images in the cache were built, and this will not trigger images to be re-built. Therefore you must not use this option when testing your finalized system for submission.
 
 ### Investigating build issues
 
@@ -185,7 +193,9 @@ Type `exit` to stop the container.
 Once your team's system has been successfully installed in the competitor container, if you are having difficulties *running* your team's system, you can open a terminal in the container that has your system installed with:
 
 ```
-docker run -it --rm --name ariac-competitor-system ariac-competitor
+docker run -it --rm --name ariac-competitor-system ariac-competitor-<your_team_name>
+# e.g. for example_team:
+# docker run -it --rm --name ariac-competitor-system ariac-competitor-example_team
 ```
 
 Inside the container you can look around with, for example:

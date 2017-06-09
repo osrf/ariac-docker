@@ -16,10 +16,11 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NOCOLOR='\033[0m'
 
-CONTAINER="ariac-competitor-system"
-IMAGE_NAME="ariac-competitor"
+IMAGE_NAME=$1
+COMMAND=$2
+
+CONTAINER="${IMAGE_NAME}-system"
 DOCKER_EXTRA_ARGS=""
-COMMAND=$1
 
 NETWORK="ariac-network"
 IP="172.18.0.20"
@@ -27,7 +28,8 @@ SERVER_IP="172.18.0.22"
 
 echo -e "${GREEN}Starting docker container named '${CONTAINER}' with IP ${IP}...${NOCOLOR}"
 
-docker run --rm --name ${CONTAINER} \
+# Keep the container around afterwards (no --rm) in case we need to copy files.
+docker run --name ${CONTAINER} \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${SERVER_IP}:11311 \
   --ip ${IP} \
