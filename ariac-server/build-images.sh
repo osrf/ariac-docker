@@ -27,10 +27,6 @@ case ${ROS_DISTRO_BUILD_TIME} in
     exit 1
 esac
 
-# Set the proper Dockerfile from distro Dockerfiles
-cp ${DIR}/gzserver/Dockerfile_${UBUNTU_DISTRO_TO_BUILD} \
-   ${DIR}/gzserver/Dockerfile
-
 docker_images="gzserver gazebo gazebo-ros nvidia-gazebo-ros ariac-server"
 
 for docker_img in ${docker_images}; do
@@ -53,19 +49,22 @@ for docker_img in ${docker_images}; do
                    --build-arg UBUNTU_DISTRO_TO_BUILD=${UBUNTU_DISTRO_TO_BUILD}"
       ;;
     'gzserver')
-      # To be sure about getting indigo or xenial right from the base
-      # no-cache.
-      DOCKER_ARGS="--no-cache"
+      DOCKER_ARGS="--no-cache \
+                   --build-arg UBUNTU_DISTRO_TO_BUILD=${UBUNTU_DISTRO_TO_BUILD}"
       ;;
     *)
       DOCKER_ARGS=""
   esac
 
 
-  if [ ${docker_img} != "gzserver" ]; then
     # Set the proper base image in the Dockerfile according to the ROS distro
     cp ${DIR}/${docker_img}/Dockerfile_generic \
        ${DIR}/${docker_img}/Dockerfile
+
+  if [ ${docker_img} = "gzserver" ]; then
+    sed -i "s+^FROM.*$+FROM ubuntu:${UBUNTU_DISTRO_TO_BUILD}+" \
+      ${DIR}/${docker_img}/Dockerfile
+  else
     sed -i "s/:latest/-${ROS_DISTRO_BUILD_TIME}:latest/" \
       ${DIR}/${docker_img}/Dockerfile
   fi
