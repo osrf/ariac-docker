@@ -5,7 +5,7 @@ echo "Waiting for ROS master"
 until rostopic list ; do sleep 1; done
 
 # Wait for the ARIAC server to come up
-sleep 10
+sleep 20
 
 # Run the team's system
 echo "Running team's system"
