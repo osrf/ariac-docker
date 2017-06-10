@@ -15,6 +15,7 @@ Docker is used to create these containers.
 Clone this code repository locally:
 
 ```
+mkdir -p ~/ariac_ws && cd ~/ariac_ws
 git clone https://github.com/osrf/ariac-docker
 cd ariac-docker
 ```
