@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y \
 # Need to install an specific version of gazebo_ros_pkgs
 # 1. Install dependencies
 RUN apt-get update && apt-get install -y \
-        libgazebo7-dev                                       \
 	ros-${ROS_DISTRO_BUILD_TIME}-ros                     \
 	ros-${ROS_DISTRO_BUILD_TIME}-catkin                  \
 	ros-${ROS_DISTRO_BUILD_TIME}-pluginlib               \

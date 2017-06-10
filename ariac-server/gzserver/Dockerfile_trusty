@@ -1,6 +1,3 @@
-# This is an auto generated Dockerfile for gazebo:gzserver7
-# generated from templates/docker_images/create_gzserver_image.Dockerfile.em
-# generated on 2017-01-27 02:26:09 +0000
 FROM ubuntu:trusty
 
 # setup keys
@@ -12,7 +9,30 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_releas
 # install gazebo packages
 RUN apt-get update && apt-get install -q -y \
     gazebo7 \
+    libgazebo7-dev \
+    wget \
     && rm -rf /var/lib/apt/lists/*
+
+# now that we have the requeired dependencies, manually remove gazebo7.* and install gazebo7.7
+RUN dpkg -r --force-depends \
+    libgazebo7 \
+    libgazebo7-dev \
+    gazebo7 \
+    gazebo7-common \
+    gazebo7-plugin-base
+
+WORKDIR /gazebo7_debs
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7_7.7.0-1~trusty_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7-dev_7.7.0-1~trusty_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7_7.7.0-1~trusty_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-common_7.7.0-1~trusty_all.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-plugin-base_7.7.0-1~trusty_amd64.deb
+RUN dpkg --force-all -i \
+    libgazebo7_7.7.0-1~trusty_amd64.deb \
+    libgazebo7-dev_7.7.0-1~trusty_amd64.deb \
+    gazebo7_7.7.0-1~trusty_amd64.deb \
+    gazebo7-common_7.7.0-1~trusty_all.deb \
+    gazebo7-plugin-base_7.7.0-1~trusty_amd64.deb
 
 # setup environment
 EXPOSE 11345
