@@ -105,6 +105,31 @@ mkdir -p /opt/ros/kinetic/share/osrf_gear/vendor/ur_description/
 cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
 ```
 
+The competition uses Gazebo 7.7, and so logs must be played back using Gazebo 7.7. If you have v7.8 or higher, follow these instructions to downgrade to 7.7:
+
+```
+# Remove your current Gazebo version
+sudo dpkg -r --force-depends libgazebo7 libgazebo7-dev gazebo7 gazebo7-common gazebo7-plugin-base
+
+# Download the 7.7 binaries
+cd ~/Downloads
+wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7_7.7.0-1~trusty_amd64.deb
+wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7-dev_7.7.0-1~trusty_amd64.deb
+wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7_7.7.0-1~trusty_amd64.deb
+wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-common_7.7.0-1~trusty_all.deb
+wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-plugin-base_7.7.0-1~trusty_amd64.deb
+
+# Install the new binaries
+dpkg --force-all -i \
+    libgazebo7_7.7.0-1~trusty_amd64.deb \
+    libgazebo7-dev_7.7.0-1~trusty_amd64.deb \
+    gazebo7_7.7.0-1~trusty_amd64.deb \
+    gazebo7-common_7.7.0-1~trusty_all.deb \
+    gazebo7-plugin-base_7.7.0-1~trusty_amd64.deb
+```
+
+You should now have Gazebo 7.7 installed and should be able to play Gazebo 7.7 log files.
+
 ### Reviewing the trial performance
 
 Once the behavior observed when playing back the trial's log file looks correct, you should then check the completion score.
