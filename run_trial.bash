@@ -13,9 +13,12 @@ NOCOLOR='\033[0m'
 
 CONTAINER_NAME=ariac-server-system
 
+# Create the directory that logs will be copied into. Since the userid of the user in the container
+# might different to the userid of the user running this script, we change it to be public-writable.
 HOST_LOG_DIR=`pwd`/logs/${TEAM_NAME}/${TRIAL_NAME}
 echo "Creating directory: ${HOST_LOG_DIR}"
 mkdir -p ${HOST_LOG_DIR}
+chmod 777 ${HOST_LOG_DIR}
 
 # TODO: don't rely on script being run in the root directory
 # TODO: error checking for case when files can't be found
@@ -48,7 +51,7 @@ COMPETITOR_IMAGE_NAME="ariac-competitor-${TEAM_NAME}"
 # Start the competition server. When the trial ends, the container will be killed.
 # The trial may end because of time-out, because of completion, or because the user called the
 # /ariac/end_competition service.
-./ariac-server/run_container.bash ${CONTAINER_NAME} ariac-server-${ROS_DISTRO} \
+./ariac-server/run_container.bash ${CONTAINER_NAME} ariac/ariac-server-${ROS_DISTRO}:latest \
   "-v ${TEAM_CONFIG_DIR}:/team_config \
   -v ${COMP_CONFIG_DIR}:/ariac/comp_configs \
   -v ${HOST_LOG_DIR}:${LOG_DIR} \

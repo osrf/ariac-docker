@@ -14,3 +14,4 @@ if [[ -z ${ROS_DISTRO_TO_BUILD} ]]; then
 fi
 
 ${DIR}/ariac-server/build-images.sh ${ROS_DISTRO_TO_BUILD}
+${DIR}/ariac-competitor/build_competitor_base_image.bash ${ROS_DISTRO_TO_BUILD}

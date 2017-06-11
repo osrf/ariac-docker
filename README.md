@@ -41,20 +41,20 @@ Together these files constitute a submission.
 The files are explained at https://bitbucket.org/osrf/ariac/wiki/finals
 You may use the files of the `example_team` submission as a template for your team's submission.
 
-## Preparing the ARIAC system
+## Fetch the ARIAC system
 
 To prepare the ARIAC competition system (but not run it), call:
 
 ```
-./prepare_ariac_system.bash
+./pull_dockerhub_images.bash
 ```
 
-This will build a Docker "image" of the competition server, ready to be launched as a container later.
+This will pull a Docker "images" of the competition server and the base competitor machine image.
 
-This will take a while to build, but you will not have to re-build it often.
+These will take a while to download.
 
 By default, ROS Indigo on Ubuntu Trusty will be used.
-You can call `./prepare_ariac_system.bash kinetic` to build with ROS Kinetic on Ubuntu Xenial.
+You can call `./pull_dockerhub_images.bash kinetic` to build with ROS Kinetic on Ubuntu Xenial.
 
 ## Preparing your team's system
 
@@ -67,10 +67,10 @@ To prepare your team's system (but not run it), call:
 # ./prepare_team_system.bash <your_team_name>
 ```
 
-This will build a Docker "image" of your team's system, ready to be launched with the ARIAC competition server.
+This will build a Docker "image" of your team's system built on top of the base competitor image, ready to be launched with the ARIAC competition server.
 
 By default, ROS Indigo on Ubuntu Trusty will be used.
-You can add `ros_distro.txt`, with contents of `kinetic` to your team's configuration directory if you want your system to be built with ROS Kinetic on Ubuntu Xenial.
+You can add `ros_distro.txt`, with contents of `kinetic` to your team's configuration directory if you want your system to be built with ROS Kinetic on Ubuntu Xenial (make sure to pull the Kinetic images if you switch).
 
 ## Running a single trial
 
@@ -181,7 +181,8 @@ If you are having difficulties installing your team's system with the `prepare_t
 First, run:
 
 ```
-docker run -it --rm --name ariac-competitor-clean-system ariac-competitor-clean
+docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-indigo
+# docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-kinetic
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
