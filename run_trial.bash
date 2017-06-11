@@ -13,9 +13,12 @@ NOCOLOR='\033[0m'
 
 CONTAINER_NAME=ariac-server-system
 
+# Create the directory that logs will be copied into. Since the userid of the user in the container
+# might different to the userid of the user running this script, we change it to be public-writable.
 HOST_LOG_DIR=`pwd`/logs/${TEAM_NAME}/${TRIAL_NAME}
 echo "Creating directory: ${HOST_LOG_DIR}"
 mkdir -p ${HOST_LOG_DIR}
+chmod 777 ${HOST_LOG_DIR}
 
 # TODO: don't rely on script being run in the root directory
 # TODO: error checking for case when files can't be found
