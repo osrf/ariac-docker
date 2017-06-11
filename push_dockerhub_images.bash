@@ -9,7 +9,7 @@ for ROS_DISTRO in ${LIST_OF_ROS_DISTROS}; do
   IMAGE_NAME=ariac-server-${ROS_DISTRO}
   docker tag ${IMAGE_NAME} ariac/${IMAGE_NAME}:latest
   docker push ariac/${IMAGE_NAME}:latest
-  IMAGE_NAME=ariac-competitor-clean-${ROS_DISTRO}
+  IMAGE_NAME=ariac-competitor-base-${ROS_DISTRO}
   docker tag ${IMAGE_NAME} ariac/${IMAGE_NAME}:latest
   docker push ariac/${IMAGE_NAME}:latest
 done

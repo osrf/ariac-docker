@@ -26,11 +26,11 @@ case ${ROS_DISTRO_BUILD_TIME} in
 esac
 
 # Create a Dockerfile from the template
-cp ${DIR}/ariac-competitor-clean/Dockerfile_trusty \
-   ${DIR}/ariac-competitor-clean/Dockerfile
+cp ${DIR}/ariac-competitor-base/Dockerfile_trusty \
+   ${DIR}/ariac-competitor-base/Dockerfile
 # Set the proper base image in the Dockerfile according to the ROS distro
 sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
-   ${DIR}/ariac-competitor-clean/Dockerfile
+   ${DIR}/ariac-competitor-base/Dockerfile
 
 
-docker build ${DOCKER_ARGS} -t ariac-competitor-clean:latest ${DIR}/ariac-competitor-clean
+docker build ${DOCKER_ARGS} -t ariac-competitor-base:latest ${DIR}/ariac-competitor-base

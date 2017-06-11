@@ -17,4 +17,4 @@ esac
 echo "Pulling the ARIAC competition images from dockerhub"
 
 docker pull ariac/ariac-server-${ROS_DISTRO}
-docker pull ariac/ariac-comptetitor-clean-${ROS_DISTRO}
+docker pull ariac/ariac-competitor-base-${ROS_DISTRO}
