@@ -180,7 +180,8 @@ If you are having difficulties installing your team's system with the `prepare_t
 First, run:
 
 ```
-docker run -it --rm --name ariac-competitor-clean-system ariac-competitor-clean
+docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-indigo
+# docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-kinetic
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
