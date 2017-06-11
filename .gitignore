@@ -3,6 +3,7 @@ ariac-server/nvidia-gazebo-ros/Dockerfile
 ariac-server/gazebo/Dockerfile
 ariac-server/gazebo-ros/Dockerfile
 ariac-server/gzserver/Dockerfile
+ariac-competitor/ariac-competitor/Dockerfile
 ariac-competitor/ariac-competitor-clean/Dockerfile
 *.swp
 *.swo

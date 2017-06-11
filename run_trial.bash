@@ -48,7 +48,7 @@ COMPETITOR_IMAGE_NAME="ariac-competitor-${TEAM_NAME}"
 # Start the competition server. When the trial ends, the container will be killed.
 # The trial may end because of time-out, because of completion, or because the user called the
 # /ariac/end_competition service.
-./ariac-server/run_container.bash ${CONTAINER_NAME} ariac-server-${ROS_DISTRO} \
+./ariac-server/run_container.bash ${CONTAINER_NAME} ariac/ariac:ariac-server-${ROS_DISTRO} \
   "-v ${TEAM_CONFIG_DIR}:/team_config \
   -v ${COMP_CONFIG_DIR}:/ariac/comp_configs \
   -v ${HOST_LOG_DIR}:${LOG_DIR} \

@@ -31,11 +31,11 @@ case ${ROS_DISTRO_BUILD_TIME} in
 esac
 
 # Create a Dockerfile from the template
-cp ${DIR}/ariac-competitor-clean/Dockerfile_trusty \
-   ${DIR}/ariac-competitor-clean/Dockerfile
+cp ${DIR}/ariac-competitor/Dockerfile_generic \
+   ${DIR}/ariac-competitor/Dockerfile
 # Set the proper base image in the Dockerfile according to the ROS distro
-sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
-   ${DIR}/ariac-competitor-clean/Dockerfile
+sed -i "s+^FROM.*$+FROM ariac/ariac:ariac-competitor-clean-${ROS_DISTRO_BUILD_TIME}+" \
+   ${DIR}/ariac-competitor/Dockerfile
 
 
 # TODO: pass the path of the team's scripts as a parameter of the Dockerfile,
@@ -44,7 +44,6 @@ echo "Copying team scripts temporarily"
 cp ${TEAM_CONFIG_DIR}/build_team_system.bash ${DIR}/ariac-competitor/build_team_system.bash
 cp ${TEAM_CONFIG_DIR}/run_team_system.bash ${DIR}/ariac-competitor/run_team_system.bash
 
-docker build ${DOCKER_ARGS} -t ariac-competitor-clean:latest ${DIR}/ariac-competitor-clean
 docker build ${DOCKER_ARGS} -t ariac-competitor-${TEAM_NAME}:latest ${DIR}/ariac-competitor
 
 echo "Removing temporary team scripts"
