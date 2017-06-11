@@ -1,0 +1,46 @@
+FROM ubuntu:trusty
+
+ARG UBUNTU_DISTRO_TO_BUILD=trusty
+
+# setup keys
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
+
+# setup sources.list
+RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable ${UBUNTU_DISTRO_TO_BUILD} main" > /etc/apt/sources.list.d/gazebo-latest.list
+
+# install gazebo packages
+RUN apt-get update && apt-get install -q -y \
+    gazebo7 \
+    libgazebo7-dev \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# now that we have the requeired dependencies, manually remove gazebo7.* and install gazebo7.7
+RUN dpkg -r --force-depends \
+    libgazebo7 \
+    libgazebo7-dev \
+    gazebo7 \
+    gazebo7-common \
+    gazebo7-plugin-base
+
+WORKDIR /gazebo7_debs
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/libgazebo7-dev_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-common_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_all.deb
+RUN wget https://s3.amazonaws.com/osrf-distributions/gazebo/releases/gazebo7-plugin-base_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb
+RUN dpkg --force-all -i \
+    libgazebo7_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb \
+    libgazebo7-dev_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb \
+    gazebo7_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb \
+    gazebo7-common_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_all.deb \
+    gazebo7-plugin-base_7.7.0-1~${UBUNTU_DISTRO_TO_BUILD}_amd64.deb
+
+# setup environment
+EXPOSE 11345
+
+# setup entrypoint
+COPY ./gzserver_entrypoint.sh /
+
+ENTRYPOINT ["/gzserver_entrypoint.sh"]
+CMD ["gzserver"]

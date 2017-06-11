@@ -41,4 +41,4 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-${DIR}/ariac-competitor/build_competitor_image.bash ${TEAM_NAME}
+${DIR}/ariac-competitor/build_competitor_image.bash ${TEAM_NAME} ${EXTRA_DOCKER_ARGS}

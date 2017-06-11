@@ -17,6 +17,8 @@ kill_matching_containers () {
   echo "Removing any Docker containers matching '$1'..."
   docker ps -a | grep "$1" | awk '{print $1}' | xargs --no-run-if-empty docker rm
   echo -e "${GREEN}Done.${NOCOLOR}"
+
+  sleep 1
 }
 
 kill_matching_containers "ariac-competitor-*"
