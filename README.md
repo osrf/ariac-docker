@@ -74,19 +74,20 @@ You can add `ros_distro.txt`, with contents of `kinetic` to your team's configur
 
 ## Running a single trial
 
-To run a specific trial (in this case the trial called `example_trial1`), call:
+To run a specific trial (in this case the trial called `example_trial2`), call:
 
 ```
-./run_trial.bash example_team example_trial1
+./run_trial.bash example_team example_trial2
 
 # For your team you will run:
 # ./run_trial.bash <your_team_name> <trial_name>
 ```
 
 This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
-The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `comp_configs/example_trial1.yaml`), and the user configuration file associated with your team name (i.e. `example_team/team_config.yaml`).
+The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `comp_configs/example_trial2.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
 
 Once the trial has finished (because your system completed the trial, because you made a call to the `/ariac/end_competition` service, or because time ran out), the logs from the trial will be available in the `logs` directory that has now been created locally.
+In the above invocation, the example code will end the competition after ~20 seconds (errors being printed to the terminal as the trial shuts down are expected).
 
 ## Reviewing the results of a trial
 
@@ -95,8 +96,10 @@ Once the trial has finished (because your system completed the trial, because yo
 To play-back a specific trial's log file, you must have ARIAC installed on your machine, and then you can call:
 
 ```
-roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/example_trial1/gazebo/state.log
+roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/example_trial2/gazebo/state.log
 ```
+
+**Provided you're using the most up-to-date competition setup**, you should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
 
 *Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
 
@@ -109,7 +112,7 @@ cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/shar
 ### Reviewing the trial performance
 
 Once the behavior observed when playing back the trial's log file looks correct, you should then check the completion score.
-To do so, open the relevant `performance.log` file (e.g. `logs/example_team/example_trial1/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
+To do so, open the relevant `performance.log` file (e.g. `logs/example_team/example_trial2/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
 
 Here is an example game score for a single-order trial with 4 parts in the correct pose.
 
