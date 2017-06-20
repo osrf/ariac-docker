@@ -26,7 +26,7 @@ for GAZEBO_LOG in $(get_list_of_gazebo_logs); do
   TRIAL_NAME=`basename ${GAZEBO_LOG%/gazebo/state.log}`
   OUTPUT_DIR=logs/${TEAM_NAME}/${TRIAL_NAME}
   mkdir -p ${OUTPUT_DIR}
-  ./generate_video.bash "${GAZEBO_LOG}" "${OUTPUT_DIR}/output.ogv"
+  ./generate_video.bash "${GAZEBO_LOG}" "${OUTPUT_DIR}/${TEAM_NAME}_${TRIAL_NAME}.ogv"
   exit_status=$?
   if [ $exit_status -eq 0 ]; then
     echo -e "${GREEN}OK.${NOCOLOR}"
