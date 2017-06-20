@@ -24,7 +24,7 @@ ${GREEN}Generating all videos for team: ${TEAM_NAME}${NOCOLOR}"
 for GAZEBO_LOG in $(get_list_of_gazebo_logs); do
   echo "Generating video: ${GAZEBO_LOG}..."
   TRIAL_NAME=`basename ${GAZEBO_LOG%/gazebo/state.log}`
-  OUTPUT_DIR=logs/${TEAM_NAME}/${TRIAL_NAME}
+  OUTPUT_DIR=logs/${TEAM_NAME}/${TRIAL_NAME}/video
   mkdir -p ${OUTPUT_DIR}
   ./generate_video.bash "${GAZEBO_LOG}" "${OUTPUT_DIR}/${TEAM_NAME}_${TRIAL_NAME}.ogv"
   exit_status=$?
