@@ -49,8 +49,7 @@ for docker_img in ${docker_images}; do
                    --build-arg UBUNTU_DISTRO_TO_BUILD=${UBUNTU_DISTRO_TO_BUILD}"
       ;;
     'gzserver')
-      DOCKER_ARGS="--no-cache \
-                   --build-arg UBUNTU_DISTRO_TO_BUILD=${UBUNTU_DISTRO_TO_BUILD}"
+      DOCKER_ARGS="--build-arg UBUNTU_DISTRO_TO_BUILD=${UBUNTU_DISTRO_TO_BUILD}"
       ;;
     *)
       DOCKER_ARGS=""

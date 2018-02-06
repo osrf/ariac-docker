@@ -37,7 +37,7 @@ mkdir -p $DST_FOLDER
 echo -n "Running ARIAC task..."
 
 # Run the task.
-ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py --no-gui -v -f $1 $2
+ARIAC_EXIT_ON_COMPLETION=1 rosrun osrf_gear gear.py -v -f $1 $2
 
 echo -e "${GREEN}OK${NOCOLOR}"
 

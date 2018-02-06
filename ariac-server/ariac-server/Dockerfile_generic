@@ -1,4 +1,4 @@
-FROM gazebo-ros:latest
+FROM nvidia-gazebo-ros:latest
 USER root
 
 ARG ROS_DISTRO_BUILD_TIME
