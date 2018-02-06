@@ -42,7 +42,7 @@ orders:
           rpy: [0, 0, 0]
 
 models_over_bins:
-  bin7:
+  bin2:
     models:
       piston_rod_part:
         xyz_start: [0.1, 0.1, 0.0]
@@ -51,7 +51,7 @@ models_over_bins:
         num_models_x: 3
         num_models_y: 4
 
-  bin6:
+  bin3:
     models:
        gear_part:
         xyz_start: [0.1, 0.1, 0.0]
