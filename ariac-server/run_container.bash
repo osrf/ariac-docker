@@ -60,9 +60,21 @@ else
   DISPLAY_PARAMS=""
 fi
 
-docker run --rm --name ${CONTAINER} \
-  -e DISPLAY=unix$DISPLAY \
-  -e XAUTHORITY=/tmp/.docker.xauth \
+# Make sure processes in the container can connect to the x server
+# Necessary so gazebo can create a context for OpenGL rendering (even headless)
+XAUTH=/tmp/.docker.xauth
+if [ ! -f $XAUTH ]
+then
+    xauth_list=$(xauth nlist :0 | sed -e 's/^..../ffff/')
+    if [ ! -z "$xauth_list" ]
+    then
+        echo $xauth_list | xauth -f $XAUTH nmerge -
+    else
+        touch $XAUTH
+    fi
+    chmod a+r $XAUTH
+fi
+sudo nvidia-docker run --rm --name ${CONTAINER} \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${IP}:11311 \
   --ip ${IP} \
@@ -71,7 +83,14 @@ docker run --rm --name ${CONTAINER} \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v "/tmp/.docker.xauth:/tmp/.docker.xauth" \
   -v /dev/log:/dev/log \
+  -e DISPLAY \
+  -e QT_X11_NO_MITSHM=1 \
+  -e XAUTHORITY=$XAUTH \
+  -v "$XAUTH:$XAUTH" \
+  -v "/tmp/.X11-unix:/tmp/.X11-unix" \
+  -v "/etc/localtime:/etc/localtime:ro" \
+  -v "/dev/input:/dev/input" \
+  --privileged \
   ${DOCKER_EXTRA_ARGS} \
-  ${DOCKER_GPU_PARAMS} \
   ${IMAGE_NAME} \
   ${COMMAND}
