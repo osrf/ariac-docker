@@ -34,7 +34,7 @@ We have provided an example submission in the `team_config` directory of this re
 You should see that there is a directory called `example_team` that has the following configuration files in it:
 
 ```
-build_team_system.bash  run_team_system.bash    team_config.yaml    ros_distro.txt
+build_team_system.bash  run_team_system.bash    team_config.yaml
 ```
 
 Together these files constitute a submission.
@@ -53,12 +53,9 @@ This will pull a Docker "images" of the competition server and the base competit
 
 These will take a while to download.
 
-By default, ROS Indigo on Ubuntu Trusty will be used.
-You can call `./pull_dockerhub_images.bash kinetic` to build with ROS Kinetic on Ubuntu Xenial.
-
 ## Preparing your team's system
 
-To prepare your team's system (but not run it), call:
+To prepare the example team's system (but not run it), call:
 
 ```
 ./prepare_team_system.bash example_team
@@ -67,24 +64,21 @@ To prepare your team's system (but not run it), call:
 # ./prepare_team_system.bash <your_team_name>
 ```
 
-This will build a Docker "image" of your team's system built on top of the base competitor image, ready to be launched with the ARIAC competition server.
-
-By default, ROS Indigo on Ubuntu Trusty will be used.
-You can add `ros_distro.txt`, with contents of `kinetic` to your team's configuration directory if you want your system to be built with ROS Kinetic on Ubuntu Xenial (make sure to pull the Kinetic images if you switch).
+This will build a Docker "image" of the example team's system built on top of the base competitor image, ready to be launched with the ARIAC competition server.
 
 ## Running a single trial
 
-To run a specific trial (in this case the trial called `qual2b`), call:
+To run an example trial (in this case the trial associated with `trial_config/sample.yaml`), call:
 
 ```
-./run_trial.bash example_team qual2b
+./run_trial.bash example_team sample
 
 # For your team you will run:
 # ./run_trial.bash <your_team_name> <trial_name>
 ```
 
 This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
-The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `trial_config/qual2b.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
+The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `trial_config/sample.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
 
 Once the trial has finished (because your system completed the trial, because you made a call to the `/ariac/end_competition` service, or because time ran out), the logs from the trial will be available in the `logs` directory that has now been created locally.
 In the above invocation, the example code will end the competition after ~20 seconds (errors being printed to the terminal as the trial shuts down are expected).
@@ -96,10 +90,10 @@ In the above invocation, the example code will end the competition after ~20 sec
 To play-back a specific trial's log file, you must have ARIAC installed on your machine, and then you can call:
 
 ```
-roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/qual2b/gazebo/state.log
+roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/sample/gazebo/state.log
 ```
 
-**Provided you're using the most up-to-date competition setup**, you should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
+You should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
 
 *Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
 
@@ -112,7 +106,7 @@ cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/shar
 ### Reviewing the trial performance
 
 Once the behavior observed when playing back the trial's log file looks correct, you should then check the completion score.
-To do so, open the relevant `performance.log` file (e.g. `logs/example_team/qual2b/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
+To do so, open the relevant `performance.log` file (e.g. `logs/example_team/sample/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
 
 Here is an example game score for a single-order trial with 4 parts in the correct pose.
 
@@ -174,7 +168,7 @@ This will kill and remove all ARIAC containers.
 ### Utilizing the Docker cache to when re-building the competitor system
 
 By default, runnng `./build_team_system.bash <your_team_name>` will re-build the image from scratch.
-During development you may find it useful to call `./build_team_system.bash <your_team_name> --use-cache` to re-use already-built image in the Docker cache if appropriate.
+During development you may find it useful to call `./prepare_team_system.bash <your_team_name> --use-cache` to re-use already-built image in the Docker cache if appropriate.
 However, new versions of packages may have been released since the images in the cache were built, and this will not trigger images to be re-built. Therefore you must not use this option when testing your finalized system for submission.
 
 ### Investigating build issues
@@ -184,8 +178,7 @@ If you are having difficulties installing your team's system with the `prepare_t
 First, run:
 
 ```
-docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-indigo
-# docker run -it --rm --name ariac-competitor-clean-system ariac/ariac-competitor-base-kinetic
+docker run -it --rm --name ariac-competitor-clean-system ariac/ariac2-competitor-base-kinetic:latest
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
