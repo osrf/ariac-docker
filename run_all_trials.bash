@@ -10,14 +10,14 @@ NOCOLOR='\033[0m'
 
 TEAM_NAME=$1
 
-COMP_CONFIGS_DIR=${DIR}/comp_configs/
+trial_config_DIR=${DIR}/trial_config/
 
 # Get the available trials from the config directory
 get_list_of_trials()
 {
-  yaml_files=$(ls ${COMP_CONFIGS_DIR}/*.yaml)
+  yaml_files=$(ls ${trial_config_DIR}/*.yaml)
 
-  for f in $(ls ${COMP_CONFIGS_DIR}/*.yaml); do
+  for f in $(ls ${trial_config_DIR}/*.yaml); do
     f=${f##*/}
     f=${f//.yaml}
     all_names="${all_names} ${f}"

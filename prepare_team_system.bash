@@ -12,8 +12,8 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-if [[ ! -d team_configs/${TEAM_NAME} ]]; then
-  echo "Can not find team directory in 'team_configs' directory: ${TEAM_NAME}"
+if [[ ! -d team_config/${TEAM_NAME} ]]; then
+  echo "Can not find team directory in 'team_config' directory: ${TEAM_NAME}"
   exit 1
 fi
 

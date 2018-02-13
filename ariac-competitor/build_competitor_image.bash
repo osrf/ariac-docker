@@ -7,7 +7,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TEAM_NAME=$1
 DOCKER_ARGS=$2
 
-TEAM_CONFIG_DIR=${DIR}/../team_configs/${TEAM_NAME}
+TEAM_CONFIG_DIR=${DIR}/../team_config/${TEAM_NAME}
 
 ROS_DISTRO_FILE=${TEAM_CONFIG_DIR}/ros_distro.txt
 if [ -f $ROS_DISTRO_FILE ]; then

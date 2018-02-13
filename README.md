@@ -30,7 +30,7 @@ Continue to the [post-install instructions](https://docs.docker.com/engine/insta
 
 Team configuration files must be put into a folder with the name of the team.
 
-We have provided an example submission in the `team_configs` directory of this repository.
+We have provided an example submission in the `team_config` directory of this repository.
 You should see that there is a directory called `example_team` that has the following configuration files in it:
 
 ```
@@ -84,7 +84,7 @@ To run a specific trial (in this case the trial called `qual2b`), call:
 ```
 
 This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
-The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `comp_configs/qual2b.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
+The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `trial_config/qual2b.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
 
 Once the trial has finished (because your system completed the trial, because you made a call to the `/ariac/end_competition` service, or because time ran out), the logs from the trial will be available in the `logs` directory that has now been created locally.
 In the above invocation, the example code will end the competition after ~20 seconds (errors being printed to the terminal as the trial shuts down are expected).
@@ -142,7 +142,7 @@ Part pose score: [4]
 
 ## Running all trials
 
-To run all trials listed in the `comp_configs` directory, call:
+To run all trials listed in the `trial_config` directory, call:
 
 ```
 ./run_all_trials.bash example_team
@@ -153,7 +153,7 @@ To run all trials listed in the `comp_configs` directory, call:
 
 This will run each of the trials sequentially automatically.
 This is the invocation that will be used to test submissions for the Finals: your system will not be provided with any information about the trial number or the conditions of the trial.
-If your system performs correctly with this invocation, regardless of the set of configuration files in the `comp_configs` directory, you're ready for the competition.
+If your system performs correctly with this invocation, regardless of the set of configuration files in the `trial_config` directory, you're ready for the competition.
 
 ## Development tips
 
