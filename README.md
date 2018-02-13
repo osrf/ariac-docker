@@ -85,31 +85,13 @@ In the above invocation, the example code will end the competition after ~20 sec
 
 ## Reviewing the results of a trial
 
-### Playing back the simulation
-
-To play-back a specific trial's log file, you must have ARIAC installed on your machine, and then you can call:
-
-```
-roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/sample/gazebo/state.log
-```
-
-You should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
-
-*Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
-
-```
-# Only do this if needed to play-back logs correctly
-mkdir -p /opt/ros/kinetic/share/osrf_gear/vendor/ur_description/
-cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
-```
-
 ### Reviewing the trial performance
 
 Once the behavior observed when playing back the trial's log file looks correct, you should then check the completion score.
 To do so, open the relevant `performance.log` file (e.g. `logs/example_team/sample/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
 
 ```
-$ tail /home/dhood/ariac_ws/ariac-docker/logs/example_team/sample/performance.log -n 25
+$ tail logs/example_team/sample/performance.log -n 25
 (1518553810 6169392) [Dbg] [ROSAriacTaskManagerPlugin.cc:492] Sim time: 22
 (1518553810 675725351) [Dbg] [ROSAriacTaskManagerPlugin.cc:717] Handle end service called
 (1518553810 676916277) [Dbg] [ROSAriacTaskManagerPlugin.cc:579] End of trial. Final score: 0
@@ -137,6 +119,26 @@ Product pose score: [0]
 ```
 
 In this example the score is 0 because the example team system does not actually complete any orders.
+
+### Playing back the simulation
+
+To play-back a specific trial's log file, you must have ARIAC installed on your machine, and then you can call:
+
+```
+roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team/sample/gazebo/state.log
+```
+
+You should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
+
+*Note: this is currently only possible for user accounts with user ID of 1000.*
+
+*Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
+
+```
+# Only do this if needed to play-back logs correctly
+mkdir -p /opt/ros/kinetic/share/osrf_gear/vendor/ur_description/
+cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
+```
 
 ## Running all trials
 
