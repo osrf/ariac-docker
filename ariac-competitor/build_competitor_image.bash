@@ -35,7 +35,7 @@ esac
 cp ${DIR}/ariac-competitor/Dockerfile_generic \
    ${DIR}/ariac-competitor/Dockerfile
 # Set the proper base image in the Dockerfile according to the ROS distro
-sed -i "s+^FROM.*$+FROM ariac/ariac-competitor-base-${ROS_DISTRO_BUILD_TIME}:latest+" \
+sed -i "s+^FROM.*$+FROM ariac/ariac2-competitor-base-${ROS_DISTRO_BUILD_TIME}:latest+" \
    ${DIR}/ariac-competitor/Dockerfile
 
 
