@@ -1,11 +1,10 @@
-# ARIAC Finals
+# ARIAC Automated Evaluation
 
 This repository contains the setup that will be used to automatically evaluate teams' submission for the Agile Robotics for Industrial Automation Competition (ARIAC) hosted by the National Institute of Standards and Technology (NIST).
-For full details on the competition Finals, please see https://bitbucket.org/osrf/ariac/wiki/finals
 
 ## Overview
 
-The setup that is created by the code in this repository is the setup that will be used for running the final competition.
+The setup that is created by the code in this repository is the setup that will be used for evaluating teams' systems automatically in the Qualifiers/Finals.
 There are two main components to the ARIAC competition setup: the ARIAC server, and the competitor's system.
 For security and reproducibility, the ARIAC server and the competitor's system are run in separate isolated environments called containers.
 Docker is used to create these containers.
@@ -26,21 +25,6 @@ Please, follow [these instructions](https://docs.docker.com/engine/installation/
 
 Continue to the [post-install instructions](https://docs.docker.com/engine/installation/linux/linux-postinstall/) and complete the "Manage Docker as a non-root user" section to avoid having to run the commands on this page using `sudo`.
 
-## Preparing the workspace
-
-Team configuration files must be put into a folder with the name of the team.
-
-We have provided an example submission in the `team_config` directory of this repository.
-You should see that there is a directory called `example_team` that has the following configuration files in it:
-
-```
-build_team_system.bash  run_team_system.bash    team_config.yaml
-```
-
-Together these files constitute a submission.
-The files are explained at https://bitbucket.org/osrf/ariac/wiki/finals
-You may use the files of the `example_team` submission as a template for your team's submission.
-
 ## Fetch the ARIAC system
 
 To prepare the ARIAC competition system (but not run it), call:
@@ -49,11 +33,27 @@ To prepare the ARIAC competition system (but not run it), call:
 ./pull_dockerhub_images.bash
 ```
 
-This will pull a Docker "images" of the competition server and the base competitor machine image.
+This will pull a Docker "images" of the latest version of the competition server and the base competitor machine image.
 
 These will take a while to download.
 
-## Preparing your team's system
+## Preparing the workspace
+
+Team configuration files must be put into the `team_config` directory in a folder with the name of the team.
+
+We have provided an example submission in the `team_config` directory of this repository.
+You should see that there is a directory called `example_team` that has the following configuration files in it:
+
+```
+$ ls team_config/example_team/
+build_team_system.bash  run_team_system.bash    team_config.yaml
+```
+
+Together these files constitute a submission.
+The files are explained at https://bitbucket.org/osrf/ariac/wiki/2018/automated_evaluation
+We will work with the files of the `example_team` submission for this tutorial; you can use them as a template for your own team's submission.
+
+## Preparing a team's system
 
 To prepare the example team's system (but not run it), call:
 
@@ -108,33 +108,39 @@ cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/shar
 Once the behavior observed when playing back the trial's log file looks correct, you should then check the completion score.
 To do so, open the relevant `performance.log` file (e.g. `logs/example_team/sample/performance.log`) and check the score output at the end of the file: it lists the scores for each order.
 
-Here is an example game score for a single-order trial with 4 parts in the correct pose.
-
 ```
+$ tail /home/dhood/ariac_ws/ariac-docker/logs/example_team/sample/performance.log -n 25
+(1518553810 6169392) [Dbg] [ROSAriacTaskManagerPlugin.cc:492] Sim time: 22
+(1518553810 675725351) [Dbg] [ROSAriacTaskManagerPlugin.cc:717] Handle end service called
+(1518553810 676916277) [Dbg] [ROSAriacTaskManagerPlugin.cc:579] End of trial. Final score: 0
 Score breakdown:
 <game_score>
-Total score: [27]
-Total process time: [75.143]
-Part travel time: [113.767]
+Total game score: [0]
+Total process time: [10.433]
+Product travel time: [0]
 <order_score order_0>
-Total score: [12]
-Time taken: [75.143]
-Complete: [true]
-<tray_score order_0_kit_0>
-Total score: [12]
-Complete: [true]
-Submitted: [true]
-Part presence score: [4]
-All parts bonus: [4]
-Part pose score: [4]
-</tray_score>
+Total order score: [0]
+Time taken: [10.432]
+Complete: [false]
+<shipment_score order_0_shipment_0>
+Completion score: [0]
+Complete: [false]
+Submitted: [false]
+Product presence score: [0]
+All products bonus: [0]
+Product pose score: [0]
+</shipment_score>
 
 </order_score>
 
 </game_score>
 ```
 
+In this example the score is 0 because the example team system does not actually complete any orders.
+
 ## Running all trials
+
+_Only one trial config file is provided at the moment; this command will be more useful in the future._
 
 To run all trials listed in the `trial_config` directory, call:
 
@@ -145,7 +151,7 @@ To run all trials listed in the `trial_config` directory, call:
 # ./run_all_trials.bash <your_team_name>
 ```
 
-This will run each of the trials sequentially automatically.
+This will run each of the trials sequentially in an automated fashion.
 This is the invocation that will be used to test submissions for the Finals: your system will not be provided with any information about the trial number or the conditions of the trial.
 If your system performs correctly with this invocation, regardless of the set of configuration files in the `trial_config` directory, you're ready for the competition.
 
