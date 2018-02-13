@@ -3,7 +3,7 @@
 options:
   insert_models_over_bins: true
   fill_demo_shipment: false
-  start_box_at_belt_center: true
+  start_box_at_belt_center: false
 
 orders:
   order_0:
@@ -55,4 +55,4 @@ models_over_bins:
 faulty_products:
   - piston_rod_part_0  # this product gets spawned in the tutorial
 
-time_limit: -1
+time_limit: 500
