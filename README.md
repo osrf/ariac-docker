@@ -15,7 +15,7 @@ Clone this code repository locally:
 
 ```
 mkdir -p ~/ariac_ws && cd ~/ariac_ws
-git clone https://github.com/osrf/ariac-docker
+git clone https://github.com/osrf/ariac-docker -b ariac2_dev
 cd ariac-docker
 ```
 
