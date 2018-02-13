@@ -27,14 +27,15 @@ echo "Using team config: ${TEAM_CONFIG_DIR}/team_config.yaml"
 COMP_CONFIG_DIR=`pwd`/trial_config
 echo "Using comp config: ${COMP_CONFIG_DIR}/${TRIAL_NAME}.yaml"
 
-ROS_DISTRO_FILE=${TEAM_CONFIG_DIR}/ros_distro.txt
-if [ -f $ROS_DISTRO_FILE ]; then
-  ROS_DISTRO=`cat $ROS_DISTRO_FILE`
-  echo "Using ROS distro of: ${ROS_DISTRO}"
-else
-  ROS_DISTRO=indigo
-  echo "ros_distro.txt not found. Assuming ROS distro of: indigo"
-fi
+ROS_DISTRO=kinetic
+# ROS_DISTRO_FILE=${TEAM_CONFIG_DIR}/ros_distro.txt
+# if [ -f $ROS_DISTRO_FILE ]; then
+#   ROS_DISTRO=`cat $ROS_DISTRO_FILE`
+#   echo "Using ROS distro of: ${ROS_DISTRO}"
+# else
+#   ROS_DISTRO=indigo
+#   echo "ros_distro.txt not found. Assuming ROS distro of: indigo"
+# fi
 
 LOG_DIR=/ariac/logs
 
