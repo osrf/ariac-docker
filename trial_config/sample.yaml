@@ -4,6 +4,7 @@ options:
   insert_models_over_bins: true
   fill_demo_shipment: false
   start_box_at_belt_center: false
+  gazebo_state_logging: true
 
 orders:
   order_0:
