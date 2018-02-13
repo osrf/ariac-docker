@@ -15,11 +15,15 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_releas
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO}-ros-controllers \
-        ariac \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN rosdep update
+RUN git clone \
+      https://bitbucket.com/osrf/ariac /tmp/ros_ws/src/ariac -b master
+RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash && \
+                  cd /tmp/ros_ws/ && \
+                  catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO} -j2 install "
 
 # Create a new user called ariac-user and give them sudo priviledges.
 ENV USERNAME ariac-user

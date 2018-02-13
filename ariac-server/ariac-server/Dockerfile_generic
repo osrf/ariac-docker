@@ -6,6 +6,7 @@ ARG ROS_DISTRO_BUILD_TIME
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \
+        ros-${ROS_DISTRO_BUILD_TIME}-robot-state-publisher \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
