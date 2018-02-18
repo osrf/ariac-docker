@@ -4,7 +4,7 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-COMP_CONFIGS_DIR=${DIR}/comp_configs/
+trial_config_DIR=${DIR}/trial_config/
 
 LIST_OF_TEAMS="example_team example_team2"
 

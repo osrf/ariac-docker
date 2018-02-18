@@ -33,4 +33,4 @@ sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
    ${DIR}/ariac-competitor-base/Dockerfile
 
 
-docker build ${DOCKER_ARGS} -t ariac-competitor-base:latest ${DIR}/ariac-competitor-base
+docker build ${DOCKER_ARGS} -t ariac-competitor-base-${ROS_DISTRO_BUILD_TIME}:latest ${DIR}/ariac-competitor-base

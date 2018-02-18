@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-ROS_DISTRO=${1-indigo}
+ROS_DISTRO=${1-kinetic}
 
 case ${ROS_DISTRO} in
-  indigo)
-    echo Using ROS distro "indigo" on ubuntu distro "trusty"
-    ;;
   kinetic)
     echo Using ROS distro "kinetic" on ubuntu distro "xenial"
     ;;
@@ -16,5 +13,5 @@ case ${ROS_DISTRO} in
 esac
 echo "Pulling the ARIAC competition images from dockerhub"
 
-docker pull ariac/ariac-server-${ROS_DISTRO}
-docker pull ariac/ariac-competitor-base-${ROS_DISTRO}
+docker pull ariac/ariac2-server-${ROS_DISTRO}:latest
+docker pull ariac/ariac2-competitor-base-${ROS_DISTRO}:latest

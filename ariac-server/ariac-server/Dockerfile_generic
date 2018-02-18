@@ -6,7 +6,7 @@ ARG ROS_DISTRO_BUILD_TIME
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \
-        ariac \
+        ros-${ROS_DISTRO_BUILD_TIME}-robot-state-publisher \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -72,6 +72,8 @@ RUN mkdir -p /tmp/ros_ws/src
 RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
                   cd /tmp/ros_ws/src && \
                   catkin_init_workspace"
+RUN git clone \
+      https://bitbucket.com/osrf/ariac /tmp/ros_ws/src/ariac -b master
 RUN git clone \
       https://github.com/ros-simulation/gazebo_ros_pkgs /tmp/ros_ws/src/gazebo_ros_pkgs \
       -b ariac-network-${ROS_DISTRO_BUILD_TIME}
