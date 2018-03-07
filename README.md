@@ -80,6 +80,10 @@ To run an example trial (in this case the trial associated with `trial_config/sa
 This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
 The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `trial_config/sample.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
 
+_Note: If you see the following warning, it is safe to ignore it._
+
+>[Wrn] [RenderEngine.cc:97] Unable to create X window. Rendering will be disabled
+
 Once the trial has finished (because your system completed the trial, because you made a call to the `/ariac/end_competition` service, or because time ran out), the logs from the trial will be available in the `logs` directory that has now been created locally.
 In the above invocation, the example code will end the competition after ~20 seconds (errors being printed to the terminal as the trial shuts down are expected).
 
