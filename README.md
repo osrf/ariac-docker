@@ -207,7 +207,8 @@ docker run -it --rm --name ariac-competitor-clean-system ariac/ariac2-competitor
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
-From inside this container, you can type all of the commands you need to install your code (you do not need to use `sudo`), then run `history` to get a list of the commands that you typed: that's what you should put in your `build_team_system` script.
+From inside this container, you can type all of the commands you need to install your code (you do not need to use `sudo`), then run `history` to get a list of the commands that you typed: that will be a good starting point for your `build_team_system` script.
+You may need to modify it slightly e.g. by adding `-y` to commands that otherwise prompt for user input, such as `apt-get install -y ros-kinetic-moveit-core`.
 
 Type `exit` to stop the container.
 
