@@ -16,7 +16,7 @@ Clone this code repository locally:
 ```
 mkdir -p ~/ariac_ws && cd ~/ariac_ws
 git clone https://github.com/osrf/ariac-docker
-cd ariac-docker
+cd ~/ariac_ws/ariac-docker
 ```
 
 ## Installing Docker
@@ -167,7 +167,18 @@ If your system performs correctly with this invocation, regardless of the set of
 
 ### Keeping the competition setup software up to date
 
-You will need to run `git pull` to fetch any recent modifications to the competition system setup, and re-run all scripts in order for the changes to take effect.
+New releases of the ARIAC software will be accompanied by new releases of the Docker images, so that the latest ARIAC version is installed in both the ARIAC competition server image and the base competitor image.
+Whenever there is a new release of the ARIAC software, or whenever you are informed of any other changes to the competition system setup, you will have to run `git pull` to get any recent modifications to the competition system setup, and re-run all scripts in order for the changes to take effect:
+
+```
+cd ~/ariac_ws/ariac-docker
+# Get any changes to the scripts in this repo.
+git pull
+# Get the most recent Docker images.
+./pull_dockerhub_images.bash
+# Re-build your team's Docker image using the latest base competitor image.
+./prepare_team_system.bash <your_team_name>
+```
 
 ### Stopping the competition/containers
 
