@@ -7,6 +7,7 @@ ARG ROS_DISTRO_BUILD_TIME
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \
         ros-${ROS_DISTRO_BUILD_TIME}-robot-state-publisher \
+        ariac2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -31,13 +32,12 @@ RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
                   cd /tmp/ros_ws/src && \
                   catkin_init_workspace"
 RUN git clone \
-      https://bitbucket.com/osrf/ariac /tmp/ros_ws/src/ariac -b master
-RUN git clone \
       https://github.com/ros-simulation/gazebo_ros_pkgs /tmp/ros_ws/src/gazebo_ros_pkgs \
       -b ariac-network-${ROS_DISTRO_BUILD_TIME}
 RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO_BUILD_TIME}/setup.bash && \
                   cd /tmp/ros_ws/ && \
                   catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/${ROS_DISTRO_BUILD_TIME} -j2 install "
+
 # setup entrypoint
 COPY ./ariac_entrypoint.sh /
 COPY ./run_ariac_task.sh /
