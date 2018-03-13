@@ -2,7 +2,7 @@ FROM gzserver:latest
 
 ARG USERID=1000
 
-# This image extends from official gzserver7 image to add a
+# This image extends from official gzserver image to add a
 # gazebo user and automatically download gazebo models.
 
 # setup environment
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a new user called ariac. Note: we don't add him to the sudo group
+# Create a new user called ariac. Note: we don't add them to the sudo group
 ENV USERNAME ariac
 RUN locale-gen en_US.UTF-8
 RUN adduser -u $USERID --gecos "Development User" --disabled-password $USERNAME

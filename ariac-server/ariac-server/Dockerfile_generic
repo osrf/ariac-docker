@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Need to install an specific version of gazebo_ros_pkgs
+# Need to install a specific version of gazebo_ros_pkgs
 # 1. Install dependencies
 RUN apt-get update && apt-get install -y \
 	ros-${ROS_DISTRO_BUILD_TIME}-ros                     \
@@ -60,9 +60,7 @@ RUN if [ "${ROS_DISTRO_BUILD_TIME}" = "indigo" ]; then \
 	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 # 2. Remove official packages
-RUN if [ "${ROS_DISTRO_BUILD_TIME}" = "indigo" ]; then \
-       export GZ_VERSION=7; \
-    fi && \
+RUN export GZ_VERSION=8 && \
     dpkg -r --force-depends ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-ros-pkgs \
                             ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-ros \
                             ros-${ROS_DISTRO_BUILD_TIME}-gazebo${GZ_VERSION}-plugins \
