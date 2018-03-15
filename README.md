@@ -134,8 +134,6 @@ roslaunch osrf_gear gear_playback.launch state_log_path:=`pwd`/logs/example_team
 
 You should see the ARIAC environment start up with parts in the bins, and the robot be controlled briefly by the example code.
 
-*Note: if you run into playback issues with gazebo8.3, try installing gazebo8.2 instead [following these instructions](https://bitbucket.org/osrf/ariac/issues/95/state-log-from-automated-evaluation-wont#comment-43778689). A new gazebo release that fixes issues with logging playback resent in 8.3 is on its way.*
-
 *Note: this is currently only possible for user accounts with user ID of 1000.*
 
 *Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
