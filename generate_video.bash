@@ -10,7 +10,7 @@
 set -e
 
 # Constants
-BLACK_WINDOW_TIME=45
+BLACK_WINDOW_TIME=5
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -23,12 +23,12 @@ usage()
   exit 1
 }
 
-# Wait until the /gazebo/ariac/world_stats topic tells us that the playback
+# Wait until the /gazebo/default/world_stats topic tells us that the playback
 # has been paused. This event will trigger the end of the recording.
 wait_until_playback_ends()
 {
   echo -n "Waiting for playback to end..."
-  until gz topic -e /gazebo/ariac/world_stats -d 1 -u | grep "paused: true" \
+  until gz topic -e /gazebo/default/world_stats -d 1 -u | grep "paused: true" \
     > /dev/null
   do
     sleep 1
