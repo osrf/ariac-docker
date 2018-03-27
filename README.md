@@ -136,12 +136,12 @@ You should see the ARIAC environment start up with parts in the bins, and the ro
 
 *Note: this is currently only possible for user accounts with user ID of 1000.*
 
-*Note: during playback, Gazebo will look for the UR10 model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the UR10 meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
+*Note: during playback, Gazebo will look for the arm model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the arm model meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
 
 ```
 # Only do this if needed to play-back logs correctly
 mkdir -p /opt/ros/kinetic/share/osrf_gear/vendor/ur_description/
-cp -r ~/ariac_ws/src/ariac/universal_robot/ur_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
+cp -r ~/ariac_ws/src/ariac/osrf_gear/vendor/iiwa_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
 ```
 
 ## Running all trials
