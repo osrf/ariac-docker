@@ -3,21 +3,26 @@ set -ex
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+ARIAC_VERSION=$1  # e.g. "ariac2.1.4"
+GAZEBO_VERSION=$2  # e.g. "gazebo_8.4"
+
 LIST_OF_ROS_DISTROS="kinetic"
 
 for ROS_DISTRO in ${LIST_OF_ROS_DISTROS}; do
   IMAGE_NAME=ariac-server-${ROS_DISTRO}
-  TAG_NAME=ariac2-server-${ROS_DISTRO}:ariac2.0.2-gazebo_7.7
+  TAG_NAME=ariac2-server-${ROS_DISTRO}:${ARIAC_VERSION}-${GAZEBO_VERSION}
   docker tag ${IMAGE_NAME} ariac/${TAG_NAME}
   docker push ariac/${TAG_NAME}
+  # Also update the `latest` label to point to the latest image.
   TAG_NAME=ariac2-server-${ROS_DISTRO}:latest
   docker tag ${IMAGE_NAME} ariac/${TAG_NAME}
   docker push ariac/${TAG_NAME}
 
   IMAGE_NAME=ariac-competitor-base-${ROS_DISTRO}
-  TAG_NAME=ariac2-competitor-base-${ROS_DISTRO}:ariac2.0.2
+  TAG_NAME=ariac2-competitor-base-${ROS_DISTRO}:${ARIAC_VERSION}
   docker tag ${IMAGE_NAME} ariac/${TAG_NAME}
   docker push ariac/${TAG_NAME}
+  # Also update the `latest` label to point to the latest image.
   TAG_NAME=ariac2-competitor-base-${ROS_DISTRO}:latest
   docker tag ${IMAGE_NAME} ariac/${TAG_NAME}
   docker push ariac/${TAG_NAME}

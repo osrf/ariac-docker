@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# Uncomment this line to rebuild without cache
-#DOCKER_ARGS="--no-cache"
+# Comment this line to rebuild using the cache
+DOCKER_ARGS="--no-cache"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
