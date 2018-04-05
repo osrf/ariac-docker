@@ -1,12 +1,12 @@
 ## Releasing a new version of ariac2 Docker images.
 
-1. Build the base Docker images.
+### 1. Build the base Docker images.
 
 The most recent version of packages will be installed from `apt`.
 Packages installed from `apt` include:
-1. `ariac2`
-1. `gazebo8`
-1. ROS packages except those in `gazebo_ros_pkgs`
+- `ariac2`
+- `gazebo8`
+- ROS packages except those in `gazebo_ros_pkgs`
 
 The `gazebo_ros_pkgs` metapackage is built from source using [this branch specific to ARIAC](https://github.com/ros-simulation/gazebo_ros_pkgs/tree/ariac-network-kinetic).
 
@@ -14,7 +14,7 @@ The `gazebo_ros_pkgs` metapackage is built from source using [this branch specif
 ./prepare_ariac_system.bash kinetic
 ```
 
-1. Test using local images.
+### 2. Test using local images.
 
 Replace references to `ariac/ariac2-*:latest` images with the local image name, where images are being used for (1) building team images and (2) running trials.
 
@@ -33,7 +33,7 @@ docker exec -it ariac-server-system /bin/bash
 dpkg -s ariac2
 ```
 
-1. Push the images to Dockerhub.
+### 3. Push the images to Dockerhub.
 
 Configure Dockerhub credentials, then:
 
@@ -48,7 +48,7 @@ This will also update the `lastest` tag on Dockerhub images.
 
 ## Running the competition.
 
-1. Fetch the latest Docker images.
+### 1. Fetch the latest Docker images.
 
 Unless you're on the same computer that created the most recent `ariac2` Docker images, fetch them from Dockerhub.
 
@@ -56,22 +56,22 @@ Unless you're on the same computer that created the most recent `ariac2` Docker 
 ./pull_dockerhub_imges.bash
 ```
 
-1. Download team systems.
+### 2. Download team systems.
 
 Create a directory for each team in `team_config` and place their system's files in it, following the layout in `team_config/example_team`.
 
-1. Prepare Docker images for all team systems.
+### 3. Prepare Docker images for all team systems.
 
 ```
 ./prepare_all_team_systems.bash
 ```
 
-1. Download the trial config files.
+### 4. Download the trial config files.
 
 All trial config files found in the `trial_config` directory will be used.
 Ensure that `gazebo_state_logging: true` is in the options of the config files.
 
-1. Run all trials for all teams.
+### 5. Run all trials for all teams.
 
 ```
 ./run_all_trials.bash
@@ -96,7 +96,7 @@ logs
             └── example_node-1-stdout.log
 ```
 
-1. Generate videos from Gazebo state logs.
+### 6. Generate videos from Gazebo state logs.
 
 ```
 ./run_all_team_videos.bash
@@ -117,7 +117,7 @@ logs
             └── example_team_sample.ogv
 ```
 
-1. Re-running trials.
+### 7. Re-run trials as necessary.
 
 Before re-running any trials, copy the `logs` directory to one with another name.
 
