@@ -29,7 +29,9 @@ get_list_of_trials()
 echo -e "
 ${GREEN}Running all trials for team: ${TEAM_NAME}${NOCOLOR}"
 
-for TRIAL_NAME in $(get_list_of_trials); do
+LIST_OF_TRIALS="$(get_list_of_trials)"
+
+for TRIAL_NAME in ${LIST_OF_TRIALS}; do
   echo "Running trial: ${TRIAL_NAME}..."
   CONSOLE_OUTPUT_DIR=logs/${TEAM_NAME}/${TRIAL_NAME}
   mkdir -p ${CONSOLE_OUTPUT_DIR}

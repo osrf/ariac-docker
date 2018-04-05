@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# Uncomment this line to rebuild without cache
-#DOCKER_ARGS="--no-cache"
+# Comment this line to rebuild using the cache
+DOCKER_ARGS="--no-cache"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -26,7 +26,7 @@ case ${ROS_DISTRO_BUILD_TIME} in
 esac
 
 # Create a Dockerfile from the template
-cp ${DIR}/ariac-competitor-base/Dockerfile_trusty \
+cp ${DIR}/ariac-competitor-base/Dockerfile_generic \
    ${DIR}/ariac-competitor-base/Dockerfile
 # Set the proper base image in the Dockerfile according to the ROS distro
 sed -i "s+^FROM.*$+FROM osrf/ros:${ROS_DISTRO_BUILD_TIME}-desktop-full+" \
