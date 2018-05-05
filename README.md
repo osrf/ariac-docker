@@ -80,6 +80,10 @@ To run an example trial (in this case the trial associated with `trial_config/sa
 This will instantiate Docker containers from the images that were prepared earlier: one for the ARIAC competition server, and one for your team's system.
 The ARIAC environment will be started using the competition configuration file associated with the trial name (i.e. `trial_config/sample.yaml`), and the user configuration file associated with the team name (i.e. `example_team/team_config.yaml`).
 
+_Note: The team's Docker container is started before the ARIAC competition server container. As such you might see the following message before the ARIAC server with the ROS master starts:_
+
+> ERROR: Unable to communicate with Master.
+
 _Note: If you see the following warning, it is safe to ignore it._
 
 >[Wrn] [RenderEngine.cc:97] Unable to create X window. Rendering will be disabled
