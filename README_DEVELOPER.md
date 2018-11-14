@@ -70,7 +70,7 @@ This will also update the `lastest` tag on Dockerhub images.
 Unless you're on the same computer that created the most recent `ariac2` Docker images, fetch them from Dockerhub.
 
 ```
-./pull_dockerhub_imges.bash
+./pull_dockerhub_images.bash
 ```
 
 ### 2. Download team systems.
