@@ -11,4 +11,6 @@ sleep 20
 echo "Running team's system"
 /run_team_system.bash
 
-echo "Team's system finished running"
+echo "Team's system finished running, ending competition"
+rosservice call /ariac/end_competition
+echo "Competition ended"
