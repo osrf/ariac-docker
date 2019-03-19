@@ -22,6 +22,9 @@ case ${ROS_DISTRO_BUILD_TIME} in
   kinetic)
     UBUNTU_DISTRO_TO_BUILD=xenial
     ;;
+  melodic)
+    UBUNTU_DISTRO_TO_BUILD=bionic
+    ;;
   *)
     echo "ROS distribution unsupported: ${ROS_DISTRO_BUILD_TIME}"
     exit 1

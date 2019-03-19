@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-ROS_DISTRO=${1-kinetic}
+ROS_DISTRO=${1-melodic}
 
 case ${ROS_DISTRO} in
-  kinetic)
-    echo Using ROS distro "kinetic" on ubuntu distro "xenial"
+  melodic)
+    echo Using ROS distro "melodic" on ubuntu distro "bionic"
     ;;
   *)
     echo "ROS distribution unsupported: ${ROS_DISTRO}"
@@ -13,5 +13,5 @@ case ${ROS_DISTRO} in
 esac
 echo "Pulling the ARIAC competition images from dockerhub"
 
-docker pull ariac/ariac2-server-${ROS_DISTRO}:latest
-docker pull ariac/ariac2-competitor-base-${ROS_DISTRO}:latest
+docker pull ariac/ariac3-server-${ROS_DISTRO}:latest
+docker pull ariac/ariac3-competitor-base-${ROS_DISTRO}:latest

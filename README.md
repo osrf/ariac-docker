@@ -50,7 +50,7 @@ build_team_system.bash  run_team_system.bash    team_config.yaml
 ```
 
 Together these files constitute a submission.
-The files are explained at https://bitbucket.org/osrf/ariac/wiki/2018/automated_evaluation
+The files are explained at https://bitbucket.org/osrf/ariac/wiki/2019/automated_evaluation
 We will work with the files of the `example_team` submission for this tutorial; you can use them as a template for your own team's submission.
 
 ## Preparing a team's system
@@ -164,14 +164,6 @@ You should see the ARIAC environment start up with parts in the bins, and the ro
 
 *Note: this is currently only possible for user accounts with user ID of 1000.*
 
-*Note: during playback, Gazebo will look for the arm model meshes in the same place as they were installed in the container. If you have installed ARIAC from source on your machine, you may need to copy the arm model meshes to the location they would be in if you had installed ARIAC from bianaries. For example:*
-
-```
-# Only do this if needed to play-back logs correctly
-mkdir -p /opt/ros/kinetic/share/osrf_gear/vendor/ur_description/
-cp -r ~/ariac_ws/src/ariac/osrf_gear/vendor/iiwa_description/ /opt/ros/kinetic/share/osrf_gear/vendor/
-```
-
 ## Running all trials
 
 _Only one trial config file is provided at the moment; this command will be more useful in the future._
@@ -229,12 +221,12 @@ If you are having difficulties installing your team's system with the `prepare_t
 First, run:
 
 ```
-docker run -it --rm --name ariac-competitor-clean-system ariac/ariac2-competitor-base-kinetic:latest
+docker run -it --rm --name ariac-competitor-clean-system ariac/ariac3-competitor-base-melodic:latest
 ```
 
 This will start a container with the state immediately before trying to run your `build_team_system` script.
 From inside this container, you can type all of the commands you need to install your code (you do not need to use `sudo`), then run `history` to get a list of the commands that you typed: that will be a good starting point for your `build_team_system` script.
-You may need to modify it slightly e.g. by adding `-y` to commands that otherwise prompt for user input, such as `apt-get install -y ros-kinetic-moveit-core`.
+You may need to modify it slightly e.g. by adding `-y` to commands that otherwise prompt for user input, such as `apt-get install -y ros-melodic-moveit-core`.
 
 Type `exit` to stop the container.
 

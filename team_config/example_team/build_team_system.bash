@@ -12,9 +12,10 @@ apt-get install -y wget unzip
 mkdir -p ~/my_team_ws/src
 
 # Fetch the source code for our team's code
-cd ~/my_team_ws/src
-wget https://bitbucket.org/osrf/ariac_team_example/get/master.zip
+cd /tmp
+wget https://bitbucket.org/osrf/ariac/get/master.zip
 unzip master.zip
+mv */ariac_example ~/my_team_ws/src
 
 cd ~/my_team_ws
 catkin_make install

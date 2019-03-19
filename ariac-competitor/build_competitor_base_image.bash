@@ -11,7 +11,7 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-ROS_DISTRO_BUILD_TIME=${1-indigo}
+ROS_DISTRO_BUILD_TIME=${1-melodic}
 
 case ${ROS_DISTRO_BUILD_TIME} in
   indigo)
@@ -19,6 +19,9 @@ case ${ROS_DISTRO_BUILD_TIME} in
     ;;
   kinetic)
     UBUNTU_DISTRO_TO_BUILD=xenial
+    ;;
+  melodic)
+    UBUNTU_DISTRO_TO_BUILD=bionic
     ;;
   *)
     echo "ROS distribution unsupported: ${ROS_DISTRO_BUILD_TIME}"
