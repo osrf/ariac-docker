@@ -4,4 +4,4 @@
 
 # Run the example node
 echo "Launching ARIAC example nodes"
-roslaunch ariac_team_example example_nodes.launch
+rosrun ariac_example ariac_example_node

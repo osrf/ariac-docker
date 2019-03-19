@@ -2,6 +2,12 @@ FROM ubuntu:trusty
 
 ARG UBUNTU_DISTRO_TO_BUILD=trusty
 
+RUN apt-get update \
+ && apt-get install -y \
+    gnupg2 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 # setup keys
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
 
@@ -10,8 +16,8 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable ${UBUNTU_DI
 
 # install gazebo packages
 RUN apt-get update && apt-get install -q -y \
-    gazebo8 \
-    libgazebo8-dev \
+    gazebo9 \
+    libgazebo9-dev \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
