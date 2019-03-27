@@ -151,6 +151,7 @@ Additionally, there may be a `video` directory containing a video produced from 
 The following properties are relevant:
 - Logs playback at a slower speed and therefore a 5 minute simulation may result in a 10-15 minute video. The simulation time is displayed in the bottom right.
 - Simulation time may jump forward a number of seconds if there is a length of time where no movement is detected in the simulation.
+- The log stops at the last time motion occurred, so log files may be shorter than expected if there is no motion.
 
 ### Playing back the simulation
 
