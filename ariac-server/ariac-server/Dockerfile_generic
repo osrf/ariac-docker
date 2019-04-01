@@ -3,9 +3,6 @@ USER root
 
 ARG ROS_DISTRO_BUILD_TIME
 
-# Bootstrap this repo with the prerelease
-RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-prerelease bionic main" > /etc/apt/sources.list.d/gazebo-prerelease.list'
-
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO_BUILD_TIME}-ros-controllers \

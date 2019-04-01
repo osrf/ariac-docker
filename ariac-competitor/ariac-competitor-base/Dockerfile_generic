@@ -12,9 +12,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
 RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list
 
-# Bootstrap this repo with the prerelease
-RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-prerelease bionic main" > /etc/apt/sources.list.d/gazebo-prerelease.list'
-
 # Install the ariac package
 RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO}-ros-controllers \
