@@ -5,7 +5,7 @@
 # E.g.: ./generate_video.sh ~/ariac_qual3/qual3b/log/gazebo/state.log output.ogv
 #
 # Please, install the following dependencies before using the script:
-#   sudo apt-get install recordmydesktop wmctrl
+#   sudo apt-get install recordmydesktop wmctrl psmisc
 
 set -e
 
@@ -23,6 +23,16 @@ usage()
   exit 1
 }
 
+is_gzclient_running()
+{
+  if pgrep gzclient ; then
+    true
+  else
+    false
+  fi
+}
+
+
 # Wait until the /gazebo/default/world_stats topic tells us that the playback
 # has been paused. This event will trigger the end of the recording.
 wait_until_playback_ends()
@@ -32,6 +42,10 @@ wait_until_playback_ends()
     > /dev/null
   do
     sleep 1
+    if ! is_gzclient_running ; then
+      echo 1>&2 "GZ client not running, bailing"
+      return 0
+    fi
   done
   echo -e "${GREEN}OK${NOCOLOR}"
 }
@@ -67,6 +81,13 @@ catkin_find --share osrf_gear/launch/gear_playback.launch | grep gear_playback \
 # Sanity check: Kill any dangling Gazebo before moving forward.
 killall -wq gzserver gzclient || true
 
+# Tell gazebo client what size and place it should be
+echo "[geometry]
+width=1330
+height=865
+x=100
+y=100" > ~/.gazebo/gui.ini
+
 # Start Gazebo in playback mode (paused).
 roslaunch osrf_gear gear_playback.launch state_log_path:=$GZ_LOG_FILE \
   > $OUTPUT.playback_output.txt 2>&1 &
@@ -96,7 +117,7 @@ echo -e "${GREEN}OK${NOCOLOR}"
 
 # Start recording the Gazebo Window.
 echo -n "Recording..."
-recordmydesktop --windowid=$GAZEBO_WINDOW_ID -o $OUTPUT \
+recordmydesktop --fps=30 -x 100 -y 100 --width=1330 --height=865 --no-sound -o $OUTPUT \
   > $OUTPUT.record_output.txt 2>&1 &
 echo -e "${GREEN}OK${NOCOLOR}"
 
