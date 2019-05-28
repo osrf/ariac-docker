@@ -1,3 +1,9 @@
+## Scope
+
+This document is intended to be used by someone running the ARIAC competition.
+If you are competing in ARIAC, you may ignore this file.
+It describes how to update and release docker images for competitors to use.
+
 ## Overview
 
 Two Docker images are distributed to teams: the ARIAC server image (runs the simulation), and the competitor base image (has ARIAC but not Gazebo installed) that team's will build their Docker image on top of.
@@ -18,6 +24,10 @@ A number of convenience scripts are provided for running the competition: see "R
 
 ## Releasing a new version of ariac3 Docker images.
 
+Before you begin, you must release a new version of the ARIAC debian package.
+In 2017 this package is `ariac`, in 2018 `ariac2`, and in 2019 `ariac3`.
+If you are running a competition later than 2019 you will need to create and release a new debian package.
+
 ### 1. Build the base Docker images.
 
 The most recent version of packages will be installed from `apt`.
@@ -36,26 +46,26 @@ The `gazebo_ros_pkgs` metapackage is built from source using [this branch specif
 
 Replace references to `ariac/ariac3-*:latest` images with the local image name, where images are being used for (1) building team images and (2) running trials.
 
-A quick way is to retag the built images:
+To do this, re-tag the built images:
 
 ```
-docker tag docker tag ariac-competitor-base-melodic ariac/ariac3-competitor-base-melodic:latest
+docker tag ariac-competitor-base-melodic ariac/ariac3-competitor-base-melodic:latest
 docker tag ariac-server-melodic ariac/ariac3-server-melodic:latest
 ```
 
-Then a docker image can be built for the team
+Now test by building a docker image for the example team.
 
 ```
 ./prepare_team_system.bash example_team
 ```
 
-And a trial can be run using the built image
+Make sure a trial can be run using the built image.
 
 ```
 ./run_trial.bash example_team sample
 ```
 
-Confirm the ARIAC version running in the container is correct:
+While the trial is running, confirm the ARIAC version running in the container is correct:
 ```
 docker exec -it ariac-server-system /bin/bash
 dpkg -s ariac3
@@ -78,7 +88,7 @@ This will also update the `lastest` tag on Dockerhub images.
 
 ### 1. Fetch the latest Docker images.
 
-Unless you're on the same computer that created the most recent `ariac3` Docker images, fetch them from Dockerhub.
+Fetch the most recent `ariac3` Docker images from Dockerhub.
 
 ```
 ./pull_dockerhub_images.bash
@@ -90,14 +100,19 @@ Create a directory for each team in `team_config` and place their system's files
 
 ### 3. Prepare Docker images for all team systems.
 
+There is a convenience script for preparing all teams at the same time, but it is inconvenient when one team's image fails to build.
+
 ```
 ./prepare_all_team_systems.bash
 ```
 
+Instead it makes sense to build the team's docker images one at a time using `prepare_team_system.bash` directly.
+
 ### 4. Download the trial config files.
 
-All trial config files found in the `trial_config` directory will be used.
-Ensure that `gazebo_state_logging: true` is in the options of the config files.
+Make sure the `trial_config` directory contains only the trial configs you want to use.
+All of them will be run.
+Each trial config must have `gazebo_state_logging: true` so that the log file used for playback (`gazebo/state.log`) is created.
 
 ### 5. Run all trials for all teams.
 
@@ -148,6 +163,8 @@ logs
 ### 7. Re-run trials as necessary.
 
 Before re-running any trials, copy the `logs` directory to one with another name.
+
+A single trial for a single team can be re-run using `./run_trial.bash example_team final_01` where `example_team` is the name of a folder in `team_config/` and `final_o1` is the name of a yaml file (excluding `.yaml`) in `trial_config/`.
 
 All trials can be re-run for a single team using `./run_all_trials.bash example_team`.
 
