@@ -1,3 +1,9 @@
+## Scope
+
+This document is intended to be used by someone running the ARIAC competition.
+If you are competing in ARIAC, you may ignore this file.
+It describes how to update and release docker images for competitors to use.
+
 ## Overview
 
 Two Docker images are distributed to teams: the ARIAC server image (runs the simulation), and the competitor base image (has ARIAC but not Gazebo installed) that team's will build their Docker image on top of.
