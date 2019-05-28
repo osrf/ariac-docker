@@ -39,7 +39,7 @@ Replace references to `ariac/ariac3-*:latest` images with the local image name, 
 A quick way is to retag the built images:
 
 ```
-docker tag docker tag ariac-competitor-base-melodic ariac/ariac3-competitor-base-melodic:latest
+docker tag ariac-competitor-base-melodic ariac/ariac3-competitor-base-melodic:latest
 docker tag ariac-server-melodic ariac/ariac3-server-melodic:latest
 ```
 
