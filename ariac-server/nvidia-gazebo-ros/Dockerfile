@@ -1,4 +1,4 @@
-FROM gazebo-ros:latest
+FROM gazebo-ros-melodic:latest
 
 # This image extends from gazebo-ros image to provide support for
 # nvidia-docker-plugin

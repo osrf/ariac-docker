@@ -1,4 +1,4 @@
-FROM ariac-competitor-base:latest
+FROM ariac/ariac3-competitor-base-melodic:latest
 
 COPY ./build_team_system.bash /
 RUN chmod 755 /build_team_system.bash

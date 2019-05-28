@@ -1,4 +1,4 @@
-FROM osrf/ros:indigo-desktop-full
+FROM osrf/ros:melodic-desktop-full
 
 USER root
 

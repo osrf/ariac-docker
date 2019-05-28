@@ -1,4 +1,4 @@
-FROM gzserver:latest
+FROM gzserver-melodic:latest
 
 ARG USERID=1000
 

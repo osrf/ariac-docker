@@ -4,11 +4,11 @@ set -e
 # first, execute overriden entrypoint from gazebo
 source "/usr/share/gazebo/setup.sh"
 
-# setup ros environment. Ignore redifiniton of ROS_DISTRO
-source "/opt/ros/${ROS_DISTRO}/setup.bash" > /dev/null
+# setup ros environment.
+source "/opt/ros/melodic/setup.bash" > /dev/null
 
 # setup ariac environment
-source "/opt/ros/${ROS_DISTRO}/etc/catkin/profile.d/99_osrf_gear_setup.sh"
+source "/opt/ros/melodic/etc/catkin/profile.d/99_osrf_gear_setup.sh"
 echo "ariac entrypoint executed"
 
 # run gear
