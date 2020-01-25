@@ -91,6 +91,4 @@ RUN wget -P /tmp/ https://bitbucket.org/osrf/gazebo_models/get/default.tar.gz \
 COPY ./ariac_entrypoint.sh /
 COPY ./run_ariac_task.sh /
 
-
-
 ENTRYPOINT ["/ariac_entrypoint.sh"]
