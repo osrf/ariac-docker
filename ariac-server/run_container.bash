@@ -56,12 +56,12 @@ then
   fi
 else
   DOCKER_GPU_PARAMS=""
-  DISPLAY_PARAMS=""
+  DISPLAY_PARAMS=" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY"
 fi
 
 DISPLAY="${DISPLAY:-:0}"
 
-docker run --rm --name ${CONTAINER} \
+docker run --rm -it --name ${CONTAINER} \
   -e XAUTHORITY=/tmp/.docker.xauth \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${IP}:11311 \
@@ -71,6 +71,7 @@ docker run --rm --name ${CONTAINER} \
   -v "/tmp/.docker.xauth:/tmp/.docker.xauth" \
   -v /dev/log:/dev/log \
   ${DOCKER_EXTRA_ARGS} \
+  ${DISPLAY_PARAMS} \
   ${DOCKER_GPU_PARAMS} \
   ${DOCKER_DISPLAY_PARAMS} \
   ${IMAGE_NAME} \

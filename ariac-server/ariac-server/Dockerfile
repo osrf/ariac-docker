@@ -12,6 +12,7 @@ RUN apt-get update \
 
 # setup keys and sources for official Gazebo and ROS debian packages
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys D2486D2DD83DB69272AFE98867170598AF249743 \
+ && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654 \
  && echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable bionic main" > /etc/apt/sources.list.d/gazebo-latest.list \
  && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116 \
  && echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list
@@ -89,5 +90,7 @@ RUN wget -P /tmp/ https://bitbucket.org/osrf/gazebo_models/get/default.tar.gz \
 # setup entrypoint
 COPY ./ariac_entrypoint.sh /
 COPY ./run_ariac_task.sh /
+
+
 
 ENTRYPOINT ["/ariac_entrypoint.sh"]
