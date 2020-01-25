@@ -56,7 +56,7 @@ then
   fi
 else
   DOCKER_GPU_PARAMS=""
-  DISPLAY_PARAMS=" -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY"
+  DISPLAY_PARAMS=""
 fi
 
 DISPLAY="${DISPLAY:-:0}"
