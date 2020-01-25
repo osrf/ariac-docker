@@ -61,7 +61,7 @@ fi
 
 DISPLAY="${DISPLAY:-:0}"
 
-docker run --rm -it --name ${CONTAINER} \
+docker run --rm --name ${CONTAINER} \
   -e XAUTHORITY=/tmp/.docker.xauth \
   -e ROS_IP=${IP} \
   -e ROS_MASTER_URI=http://${IP}:11311 \
@@ -73,6 +73,6 @@ docker run --rm -it --name ${CONTAINER} \
   ${DOCKER_EXTRA_ARGS} \
   ${DISPLAY_PARAMS} \
   ${DOCKER_GPU_PARAMS} \
-  ${DISPLAY_PARAMS} \
+  ${DOCKER_DISPLAY_PARAMS} \
   ${IMAGE_NAME} \
   ${COMMAND}
