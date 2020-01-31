@@ -53,8 +53,7 @@ RUN mkdir -p /tmp/ros_ws/src
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
                   cd /tmp/ros_ws/src && \
                   catkin_init_workspace"
-RUN git clone \
-      https://github.com/osrf/ariac-gazebo_ros_pkgs.git /tmp/ros_ws/src/gazebo_ros_pkgs \
+RUN git clone https://github.com/osrf/ariac-gazebo_ros_pkgs.git /tmp/ros_ws/src/gazebo_ros_pkgs \
       -b ariac-network-melodic
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
                   cd /tmp/ros_ws/ && \
