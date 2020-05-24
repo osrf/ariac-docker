@@ -12,6 +12,7 @@ RUN apt-get update \
 
 # setup keys and sources for official Gazebo and ROS debian packages
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys D2486D2DD83DB69272AFE98867170598AF249743 \
+ && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654 \
  && echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable bionic main" > /etc/apt/sources.list.d/gazebo-latest.list \
  && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116 \
  && echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list
@@ -52,8 +53,7 @@ RUN mkdir -p /tmp/ros_ws/src
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
                   cd /tmp/ros_ws/src && \
                   catkin_init_workspace"
-RUN git clone \
-      https://github.com/osrf/ariac-gazebo_ros_pkgs.git /tmp/ros_ws/src/gazebo_ros_pkgs \
+RUN git clone https://github.com/osrf/ariac-gazebo_ros_pkgs.git /tmp/ros_ws/src/gazebo_ros_pkgs \
       -b ariac-network-melodic
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
                   cd /tmp/ros_ws/ && \
